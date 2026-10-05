@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finora — Clarity for every dollar</title>
+  <meta name="description" content="Finora — clarity for every dollar. A personal finance operating system. Track cash flow, apply institutional budgeting frameworks, and project compound wealth — all in one elegant platform." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2310b981'/%3E%3Cpath d='M7 21l6-6 4 4 8-9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <meta property="og:title" content="Finora — Clarity for every dollar" />
+  <meta property="og:description" content="Track cash flow, apply budgeting frameworks and project compound wealth." />
+  <meta property="og:type" content="website" />
+  <noscript><style>.stagger>*,.hero-cards-reveal>*,.reveal-line{opacity:1!important;filter:none!important;transform:none!important}#loader{display:none!important}</style></noscript>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: {
+              950: '#0a0b0e',
+              900: '#0d0e12',
+              800: '#12141c',
+              700: '#1a1d27',
+              600: '#212636',
+            },
+            emerald: {
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+            },
+            cyan: {
+              400: '#22d3ee',
+              500: '#06b6d4',
+              600: '#0891b2',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+            'glow': 'glow 2.5s ease-in-out infinite alternate',
+            'fade-up': 'fadeUp 0.8s ease-out forwards',
+            'fade-in': 'fadeIn 0.6s ease-out forwards',
+            'ticker': 'ticker 18s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' },
+            },
+            glow: {
+              '0%': { boxShadow: '0 0 20px rgba(16, 185, 129, 0.15)' },
+              '100%': { boxShadow: '0 0 40px rgba(16, 185, 129, 0.35)' },
+            },
+            fadeUp: {
+              '0%': { opacity: '0', transform: 'translateY(24px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            ticker: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-50%)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #0a0b0e; }
+    ::-webkit-scrollbar-thumb { background: #212636; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #10b981; }
+
+    /* Glassmorphic base + gradient border */
+    .glass {
+      background: rgba(18, 20, 28, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid transparent;
+      background-clip: padding-box;
+      position: relative;
+    }
+    .glass::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.35), rgba(33, 38, 54, 0.6), rgba(6, 182, 212, 0.3));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .glass-strong {
+      background: rgba(18, 20, 28, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid transparent;
+      position: relative;
+    }
+    .glass-strong::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.4), rgba(33, 38, 54, 0.7), rgba(6, 182, 212, 0.35));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    /* Animated gradient mesh background */
+    .mesh-bg {
+      background: #0a0b0e;
+      position: relative;
+    }
+    .mesh-animated {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .mesh-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.7;
+      will-change: transform;
+    }
+    .mesh-blob-1 {
+      width: 60vmax; height: 60vmax;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.45) 0%, transparent 70%);
+      top: -18%; left: -12%;
+      animation: meshDrift1 16s ease-in-out infinite alternate;
+    }
+    .mesh-blob-2 {
+      width: 50vmax; height: 50vmax;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.38) 0%, transparent 70%);
+      top: 8%; right: -18%;
+      animation: meshDrift2 20s ease-in-out infinite alternate;
+    }
+    .mesh-blob-3 {
+      width: 45vmax; height: 45vmax;
+      background: radial-gradient(circle, rgba(52, 211, 153, 0.28) 0%, transparent 70%);
+      bottom: -12%; left: 28%;
+      animation: meshDrift3 14s ease-in-out infinite alternate;
+    }
+    @keyframes meshDrift1 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(8%, 12%) scale(1.12); }
+    }
+    @keyframes meshDrift2 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-10%, 8%) scale(1.08); }
+    }
+    @keyframes meshDrift3 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(6%, -10%) scale(1.15); }
+    }
+
+    /* Soft film grain */
+    .grain-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.04;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 180px 180px;
+      mix-blend-mode: overlay;
+    }
+
+    /* Particle canvas */
+    #particle-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.55;
+    }
+
+    /* Parallax layers */
+    .parallax-layer {
+      will-change: transform;
+      transition: transform 0.15s ease-out;
+    }
+
+    /* 3D tilt card + enhanced glass */
+    .tilt-card {
+      transform-style: preserve-3d;
+      transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.35s ease;
+      background: rgba(18, 20, 28, 0.7);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid transparent;
+      position: relative;
+    }
+    .tilt-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(145deg, rgba(16, 185, 129, 0.45), rgba(33, 38, 54, 0.5) 40%, rgba(6, 182, 212, 0.4));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0.85;
+      transition: opacity 0.35s ease;
+    }
+    .tilt-card:hover {
+      transform: perspective(1000px) rotateX(2deg) rotateY(-3deg) translateY(-4px);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(16, 185, 129, 0.18);
+    }
+    .tilt-card:hover::before {
+      opacity: 1;
+      background: linear-gradient(145deg, rgba(16, 185, 129, 0.65), rgba(33, 38, 54, 0.4) 40%, rgba(6, 182, 212, 0.55));
+    }
+
+    /* Glow button */
+    .btn-glow {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .btn-glow::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      background: linear-gradient(135deg, #10b981, #06b6d4, #10b981);
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      filter: blur(12px);
+    }
+    .btn-glow:hover::before {
+      opacity: 0.7;
+    }
+    .btn-glow:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+    }
+
+    /* Loader */
+    #loader {
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* Page fade transition */
+    body.page-exit {
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    /* Interactive preview slider */
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      background: #212636;
+      border-radius: 999px;
+      outline: none;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #10b981, #06b6d4);
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
+      border: 2px solid #0a0b0e;
+    }
+    input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #10b981, #06b6d4);
+      cursor: pointer;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
+      border: 2px solid #0a0b0e;
+    }
+
+    /* Live ticker animation */
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: ticker 22s linear infinite;
+    }
+    .ticker-track:hover {
+      animation-play-state: paused;
+    }
+
+    /* Slow “come to light” reveal — starts after loader via .is-ready */
+    .stagger > * {
+      opacity: 0;
+      filter: blur(8px);
+      transform: translateY(28px);
+    }
+    .stagger.is-ready > * {
+      animation: comeToLight 1.15s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .stagger.is-ready > *:nth-child(1) { animation-delay: 0.15s; }
+    .stagger.is-ready > *:nth-child(2) { animation-delay: 0.4s; }
+    .stagger.is-ready > *:nth-child(3) { animation-delay: 0.7s; }
+    .stagger.is-ready > *:nth-child(4) { animation-delay: 1.0s; }
+    .stagger.is-ready > *:nth-child(5) { animation-delay: 1.3s; }
+    .stagger.is-ready > *:nth-child(6) { animation-delay: 1.55s; }
+
+    @keyframes comeToLight {
+      0% {
+        opacity: 0;
+        filter: blur(10px);
+        transform: translateY(28px);
+      }
+      40% {
+        opacity: 0.4;
+        filter: blur(4px);
+      }
+      100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
+    }
+
+    .reveal-line {
+      display: block;
+      opacity: 0;
+      filter: blur(12px);
+      transform: translateY(20px);
+    }
+    .stagger.is-ready .reveal-line {
+      animation: comeToLight 1.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .stagger.is-ready h1 .reveal-line:nth-child(1) { animation-delay: 0.45s; }
+    .stagger.is-ready h1 .reveal-line:nth-child(2) { animation-delay: 0.75s; }
+
+    .hero-cards-reveal > * {
+      opacity: 0;
+      filter: blur(6px);
+      transform: translateY(24px) scale(0.98);
+    }
+    .hero-cards-reveal.is-ready > * {
+      animation: comeToLight 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+    .hero-cards-reveal.is-ready > *:nth-child(1) { animation-delay: 0.9s; }
+    .hero-cards-reveal.is-ready > *:nth-child(2) { animation-delay: 1.2s; }
+    .hero-cards-reveal.is-ready > *:nth-child(3) { animation-delay: 1.5s; }
+
+    /* Soft grid pattern */
+    .grid-pattern {
+      background-image:
+        linear-gradient(rgba(33, 38, 54, 0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(33, 38, 54, 0.4) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 20%, transparent 70%);
+    }
+
+    /* ===== HEROIC / FUTURISTIC ===== */
+    .hero-shimmer {
+      background: linear-gradient(105deg, #34d399 0%, #22d3ee 25%, #fff 50%, #22d3ee 75%, #34d399 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+    @keyframes shimmer {
+      to { background-position: 200% center; }
+    }
+
+    .scan-line {
+      position: absolute;
+      left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.5), rgba(6, 182, 212, 0.5), transparent);
+      animation: scanMove 5s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 3;
+      opacity: 0.4;
+    }
+    @keyframes scanMove {
+      0%, 100% { top: 15%; opacity: 0; }
+      10% { opacity: 0.5; }
+      50% { top: 75%; opacity: 0.35; }
+      90% { opacity: 0.5; }
+    }
+
+    .ring-pulse {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      animation: ringPulse 6s ease-out infinite;
+      pointer-events: none;
+    }
+    @keyframes ringPulse {
+      0% { transform: scale(0.6); opacity: 0.6; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+
+    .hero-card-futuristic {
+      position: relative;
+      background: linear-gradient(145deg, rgba(18, 20, 28, 0.9), rgba(18, 20, 28, 0.6));
+      backdrop-filter: blur(20px);
+      border: 1px solid transparent;
+      box-shadow:
+        0 0 0 1px rgba(16, 185, 129, 0.15),
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
+    }
+    .hero-card-futuristic:hover {
+      transform: perspective(1000px) rotateX(3deg) rotateY(-4deg) translateY(-6px) scale(1.02);
+      box-shadow:
+        0 0 0 1px rgba(16, 185, 129, 0.4),
+        0 0 40px rgba(16, 185, 129, 0.2),
+        0 30px 60px -12px rgba(0, 0, 0, 0.6);
+    }
+    .hero-card-futuristic::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.6), rgba(6, 182, 212, 0.5), transparent);
+    }
+
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #34d399;
+      box-shadow: 0 0 8px #10b981, 0 0 16px rgba(16, 185, 129, 0.5);
+      animation: statusBlink 2s ease-in-out infinite;
+    }
+    @keyframes statusBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .btn-heroic {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #10b981, #059669);
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.35), 0 8px 24px rgba(0, 0, 0, 0.3);
+      transition: all 0.35s ease;
+    }
+    .btn-heroic::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.25) 50%, transparent 60%);
+      background-size: 200% 100%;
+      animation: btnShine 3s ease-in-out infinite;
+    }
+    @keyframes btnShine {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .btn-heroic:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 50px rgba(16, 185, 129, 0.5), 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    .stat-counter {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hud-label {
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(52, 211, 153, 0.7);
+    }
+
+    @media (max-width: 639px) {
+      .mesh-blob-2, .mesh-blob-3 { display: none; }
+      .mesh-blob { filter: blur(60px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .mesh-blob, .scan-line, .ring-pulse, .hero-shimmer, .btn-heroic::before, .status-dot {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-obsidian-950 text-white font-sans antialiased overflow-x-hidden">
+
+  <!-- ===================== LOADER ===================== -->
+  <div id="loader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-obsidian-950">
+    <div class="relative">
+      <div class="w-16 h-16 rounded-full border-2 border-obsidian-600 border-t-emerald-500 animate-spin"></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <div class="w-8 h-8 rounded-full bg-emerald-500/20 animate-pulse-slow"></div>
+      </div>
+    </div>
+    <p class="mt-6 text-sm font-medium tracking-widest text-gray-400 uppercase">Initializing Finora</p>
+    <div class="mt-3 h-0.5 w-32 bg-obsidian-600 rounded-full overflow-hidden">
+      <div id="loader-bar" class="h-full bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full" style="width: 0%"></div>
+    </div>
+  </div>
+
+  <!-- ===================== NAVIGATION ===================== -->
+  <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 md:h-20">
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2.5 group">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:shadow-emerald-500/40 transition-shadow">
+            <i data-lucide="trending-up" class="w-5 h-5 text-white"></i>
+          </div>
+          <span class="text-lg font-bold tracking-tight">Fino<span class="text-emerald-400">ra</span></span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="#features" class="text-sm text-gray-400 hover:text-white transition-colors">Features</a>
+          <a href="#preview" class="text-sm text-gray-400 hover:text-white transition-colors">Live Preview</a>
+          <a href="#frameworks" class="text-sm text-gray-400 hover:text-white transition-colors">Frameworks</a>
+          <a href="app.html" class="btn-glow inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-500 text-obsidian-950 text-sm font-semibold hover:bg-emerald-400 transition-colors">
+            Launch App
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+        </nav>
+
+        <!-- Mobile menu button -->
+        <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-obsidian-800 transition-colors" aria-label="Toggle menu">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-menu" class="md:hidden hidden glass-strong border-t border-obsidian-600">
+      <div class="px-4 py-4 space-y-3">
+        <a href="#features" class="block text-sm text-gray-300 hover:text-white py-2">Features</a>
+        <a href="#preview" class="block text-sm text-gray-300 hover:text-white py-2">Live Preview</a>
+        <a href="#frameworks" class="block text-sm text-gray-300 hover:text-white py-2">Frameworks</a>
+        <a href="app.html" class="btn-glow flex items-center justify-center gap-2 w-full px-5 py-3 rounded-full bg-emerald-500 text-obsidian-950 text-sm font-semibold mt-2">
+          Launch App
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="relative min-h-screen flex items-center pt-20 pb-16 overflow-hidden mesh-bg">
+    <!-- 1. Animated mesh blobs -->
+    <div class="mesh-animated" aria-hidden="true">
+      <div class="mesh-blob mesh-blob-1"></div>
+      <div class="mesh-blob mesh-blob-2"></div>
+      <div class="mesh-blob mesh-blob-3"></div>
+    </div>
+
+    <!-- 2. Soft particle field -->
+    <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+    <!-- 3. Film grain -->
+    <div class="grain-overlay" aria-hidden="true"></div>
+
+    <!-- Scan line -->
+    <div class="scan-line" aria-hidden="true"></div>
+
+    <!-- Soft grid overlay -->
+    <div class="absolute inset-0 grid-pattern pointer-events-none opacity-35 z-[2]"></div>
+
+    <!-- Floating atmospheric orbs + pulse rings -->
+    <div class="parallax-layer absolute top-1/4 left-1/4 w-72 h-72 bg-emerald-500/20 rounded-full blur-3xl animate-float pointer-events-none z-[2]" data-speed="0.15"></div>
+    <div class="parallax-layer absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/15 rounded-full blur-3xl animate-float pointer-events-none z-[2]" data-speed="0.08" style="animation-delay: -3s;"></div>
+    <div class="parallax-layer absolute top-1/2 right-1/3 w-48 h-48 bg-emerald-400/12 rounded-full blur-2xl animate-float pointer-events-none z-[2]" style="animation-delay: -1.5s;" data-speed="0.22"></div>
+    <div class="ring-pulse absolute top-[20%] right-[18%] w-40 h-40 z-[2] hidden lg:block" style="animation-delay: 0s;"></div>
+    <div class="ring-pulse absolute top-[20%] right-[18%] w-40 h-40 z-[2] hidden lg:block" style="animation-delay: 2s;"></div>
+    <div class="ring-pulse absolute top-[20%] right-[18%] w-40 h-40 z-[2] hidden lg:block" style="animation-delay: 4s;"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Left content -->
+        <div class="stagger">
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full glass text-xs font-medium text-emerald-400 mb-6 border border-emerald-500/20">
+            <span class="status-dot"></span>
+            <span class="tracking-wide">FINORA · CLARITY FOR EVERY DOLLAR</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-extrabold leading-[1.08] tracking-tight mb-6">
+            <span class="reveal-line">Command your capital.</span>
+            <span class="reveal-line hero-shimmer">Engineer your future.</span>
+          </h1>
+
+          <p class="text-base sm:text-lg text-gray-400 max-w-lg mb-8 leading-relaxed">
+            Institutional-grade cash flow, budget engines, and compound projections — built as a single, lightning-fast operating system for your wealth.
+          </p>
+
+          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-10">
+            <a href="app.html" id="cta-launch" class="btn-heroic inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-obsidian-950 font-bold text-base relative z-10">
+              <span class="relative z-10 flex items-center gap-2.5">
+                Launch Dashboard
+                <i data-lucide="zap" class="w-5 h-5"></i>
+              </span>
+            </a>
+            <a href="#preview" class="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full glass text-white font-medium hover:bg-obsidian-800/80 transition-colors border border-obsidian-600/80">
+              <i data-lucide="play-circle" class="w-5 h-5 text-cyan-400"></i>
+              Live Preview
+            </a>
+          </div>
+
+          <!-- HUD-style live ticker -->
+          <div class="hero-card-futuristic rounded-2xl p-4 overflow-hidden">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <i data-lucide="activity" class="w-3.5 h-3.5 text-emerald-400"></i>
+                <span class="hud-label">Sample snapshot</span>
+              </div>
+              <span class="text-[10px] text-emerald-500/80 font-mono tracking-wider">AUD · SAMPLE DATA</span>
+            </div>
+            <div class="overflow-hidden">
+              <div class="ticker-track gap-8 text-sm font-mono">
+                <span class="text-gray-400">NW <span class="text-emerald-400 font-semibold stat-counter" data-count="128450" data-prefix="$">$128,450</span></span>
+                <span class="text-gray-400">IN <span class="text-cyan-400 font-semibold stat-counter" data-count="8420" data-prefix="$">$8,420</span></span>
+                <span class="text-gray-400">SAVE <span class="text-emerald-400 font-semibold stat-counter" data-count="32.4" data-suffix="%" data-decimals="1">32.4%</span></span>
+                <span class="text-gray-400">10Y <span class="text-cyan-400 font-semibold stat-counter" data-count="412800" data-prefix="$">$412,800</span></span>
+                <span class="text-gray-400">BURN <span class="text-orange-400 font-semibold stat-counter" data-count="5690" data-prefix="$">$5,690</span></span>
+                <span class="text-gray-400">NW <span class="text-emerald-400 font-semibold stat-counter" data-count="128450" data-prefix="$">$128,450</span></span>
+                <span class="text-gray-400">IN <span class="text-cyan-400 font-semibold stat-counter" data-count="8420" data-prefix="$">$8,420</span></span>
+                <span class="text-gray-400">SAVE <span class="text-emerald-400 font-semibold stat-counter" data-count="32.4" data-suffix="%" data-decimals="1">32.4%</span></span>
+                <span class="text-gray-400">10Y <span class="text-cyan-400 font-semibold stat-counter" data-count="412800" data-prefix="$">$412,800</span></span>
+                <span class="text-gray-400">BURN <span class="text-orange-400 font-semibold stat-counter" data-count="5690" data-prefix="$">$5,690</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Futuristic HUD cards -->
+        <div class="relative hidden lg:block">
+          <div class="relative z-10 space-y-4 hero-cards-reveal">
+            <!-- Card 1 — Net Worth -->
+            <div class="hero-card-futuristic rounded-2xl p-5 max-w-sm ml-auto animate-float" style="animation-delay: 0s;">
+              <div class="flex items-center justify-between mb-2">
+                <span class="hud-label">Net Worth</span>
+                <span class="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-full">
+                  <i data-lucide="trending-up" class="w-3 h-3"></i> <span class="stat-counter" data-count="12.4" data-prefix="+" data-suffix="%" data-decimals="1">+12.4%</span>
+                </span>
+              </div>
+              <p class="text-3xl font-bold tracking-tight font-mono text-white stat-counter" data-count="128450" data-prefix="$">$128,450</p>
+              <div class="mt-3 h-1.5 bg-obsidian-600/80 rounded-full overflow-hidden">
+                <div class="h-full w-[68%] bg-gradient-to-r from-emerald-500 to-cyan-400 rounded-full shadow-[0_0_12px_rgba(16,185,129,0.6)]"></div>
+              </div>
+              <div class="mt-2 flex justify-between text-[10px] text-gray-400 font-mono">
+                <span>TARGET 200K</span>
+                <span class="text-emerald-400/80 stat-counter" data-count="68" data-suffix="%">68%</span>
+              </div>
+            </div>
+
+            <!-- Card 2 — Allocation -->
+            <div class="hero-card-futuristic rounded-2xl p-5 max-w-xs animate-float" style="animation-delay: -2s;">
+              <div class="flex items-center gap-3 mb-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center ring-1 ring-emerald-500/30">
+                  <i data-lucide="pie-chart" class="w-5 h-5 text-emerald-400"></i>
+                </div>
+                <div>
+                  <p class="text-sm font-semibold">50 / 30 / 20</p>
+                  <p class="hud-label mt-0.5">Allocation engine</p>
+                </div>
+              </div>
+              <div class="flex gap-1 h-2.5 rounded-full overflow-hidden">
+                <div class="bg-emerald-500 flex-[5] shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+                <div class="bg-cyan-400 flex-[3]"></div>
+                <div class="bg-orange-400/80 flex-[2]"></div>
+              </div>
+              <div class="mt-2 flex gap-3 text-[10px] font-mono text-gray-400">
+                <span><span class="text-emerald-400">■</span> Needs</span>
+                <span><span class="text-cyan-400">■</span> Wants</span>
+                <span><span class="text-orange-400">■</span> Save</span>
+              </div>
+            </div>
+
+            <!-- Card 3 — Projection -->
+            <div class="hero-card-futuristic rounded-2xl p-5 max-w-sm ml-10 animate-float" style="animation-delay: -4s;">
+              <div class="flex items-center justify-between mb-2">
+                <span class="hud-label">10-Year Projection</span>
+                <i data-lucide="sparkles" class="w-4 h-4 text-cyan-400"></i>
+              </div>
+              <p class="text-2xl font-bold font-mono text-cyan-400 stat-counter" data-count="412800" data-prefix="$">$412,800</p>
+              <p class="text-[11px] text-gray-400 mt-1 font-mono">8% CAGR · $1,200 / mo contribution</p>
+              <div class="mt-3 flex items-end gap-0.5 h-8">
+                <div class="flex-1 bg-emerald-500/20 rounded-sm" style="height:30%"></div>
+                <div class="flex-1 bg-emerald-500/30 rounded-sm" style="height:40%"></div>
+                <div class="flex-1 bg-emerald-500/40 rounded-sm" style="height:48%"></div>
+                <div class="flex-1 bg-emerald-500/50 rounded-sm" style="height:55%"></div>
+                <div class="flex-1 bg-emerald-500/60 rounded-sm" style="height:65%"></div>
+                <div class="flex-1 bg-cyan-400/70 rounded-sm" style="height:78%"></div>
+                <div class="flex-1 bg-cyan-400 rounded-sm shadow-[0_0_8px_rgba(6,182,212,0.5)]" style="height:100%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURES ===================== -->
+  <section id="features" class="relative py-24 lg:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <p class="text-sm font-medium text-emerald-400 tracking-wider uppercase mb-3">Platform Capabilities</p>
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Everything you need to command your finances</h2>
+        <p class="text-gray-400">From real-time ledgers to institutional frameworks and long-horizon projections — built for clarity and speed.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Feature 1 -->
+        <div class="tilt-card glass rounded-2xl p-6 group">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-5 group-hover:bg-emerald-500/20 transition-colors">
+            <i data-lucide="wallet" class="w-6 h-6 text-emerald-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Granular Ledger</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">Track income and expenses across Housing, Transport, Insurance, Utilities, Groceries, Entertainment, Investments and more. Filter, edit, delete — all persisted locally.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="tilt-card glass rounded-2xl p-6 group">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center mb-5 group-hover:bg-cyan-500/20 transition-colors">
+            <i data-lucide="layout-dashboard" class="w-6 h-6 text-cyan-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Budget Frameworks</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">Instantly switch between 50/30/20, Pay Yourself First, and Zero-Based Budgeting. Side-by-side allocation simulation with live recalculation.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="tilt-card glass rounded-2xl p-6 group">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-5 group-hover:bg-emerald-500/20 transition-colors">
+            <i data-lucide="line-chart" class="w-6 h-6 text-emerald-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Wealth Projection</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">Compound interest engine with initial capital, monthly contributions, expected CAGR and custom time horizons. Dynamic Chart.js visualization.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="tilt-card glass rounded-2xl p-6 group">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center mb-5 group-hover:bg-cyan-500/20 transition-colors">
+            <i data-lucide="target" class="w-6 h-6 text-cyan-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Goal Tracker</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">Set savings goals with live progress milestones. Visual progress bars keep you accountable and motivated.</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="tilt-card glass rounded-2xl p-6 group">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-5 group-hover:bg-emerald-500/20 transition-colors">
+            <i data-lucide="activity" class="w-6 h-6 text-emerald-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Key Metrics</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">Tracked savings, monthly inflow, burn rate and savings rate — filtered by month and always visible at the top of your dashboard.</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="tilt-card glass rounded-2xl p-6 group">
+          <div class="w-12 h-12 rounded-xl bg-cyan-500/10 flex items-center justify-center mb-5 group-hover:bg-cyan-500/20 transition-colors">
+            <i data-lucide="database" class="w-6 h-6 text-cyan-400"></i>
+          </div>
+          <h3 class="text-lg font-semibold mb-2">Local Persistence</h3>
+          <p class="text-sm text-gray-400 leading-relaxed">All data lives in your browser via localStorage. No accounts, no servers — private by design and available across sessions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== INTERACTIVE PREVIEW ===================== -->
+  <section id="preview" class="relative py-24 lg:py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-emerald-500/[0.03] to-transparent pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <p class="text-sm font-medium text-cyan-400 tracking-wider uppercase mb-3">Interactive Widget</p>
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Test a budget split right now</h2>
+        <p class="text-gray-400">Adjust monthly income and watch the 50/30/20 allocation update live — no signup required.</p>
+      </div>
+
+      <div class="max-w-3xl mx-auto glass-strong rounded-3xl p-6 sm:p-10">
+        <!-- Income slider -->
+        <div class="mb-8">
+          <div class="flex items-center justify-between mb-3">
+            <label for="income-slider" class="text-sm font-medium text-gray-300">Monthly Income (AUD)</label>
+            <span id="income-display" class="text-2xl font-bold text-emerald-400">$8,000</span>
+          </div>
+          <input type="range" id="income-slider" min="2000" max="25000" step="100" value="8000" class="w-full" />
+          <div class="flex justify-between text-xs text-gray-400 mt-1.5">
+            <span>$2,000</span>
+            <span>$25,000</span>
+          </div>
+        </div>
+
+        <!-- Allocation cards -->
+        <div class="grid sm:grid-cols-3 gap-4 mb-8">
+          <div class="rounded-2xl bg-obsidian-800/80 border border-obsidian-600 p-5 text-center">
+            <div class="text-xs uppercase tracking-wider text-gray-400 mb-1">Needs (50%)</div>
+            <div id="needs-amount" class="text-xl font-bold text-white">$4,000</div>
+            <div class="mt-3 h-1.5 bg-obsidian-600 rounded-full overflow-hidden">
+              <div class="h-full w-1/2 bg-emerald-500 rounded-full"></div>
+            </div>
+          </div>
+          <div class="rounded-2xl bg-obsidian-800/80 border border-obsidian-600 p-5 text-center">
+            <div class="text-xs uppercase tracking-wider text-gray-400 mb-1">Wants (30%)</div>
+            <div id="wants-amount" class="text-xl font-bold text-white">$2,400</div>
+            <div class="mt-3 h-1.5 bg-obsidian-600 rounded-full overflow-hidden">
+              <div class="h-full w-[30%] bg-cyan-500 rounded-full"></div>
+            </div>
+          </div>
+          <div class="rounded-2xl bg-obsidian-800/80 border border-obsidian-600 p-5 text-center">
+            <div class="text-xs uppercase tracking-wider text-gray-400 mb-1">Savings (20%)</div>
+            <div id="savings-amount" class="text-xl font-bold text-emerald-400">$1,600</div>
+            <div class="mt-3 h-1.5 bg-obsidian-600 rounded-full overflow-hidden">
+              <div class="h-full w-1/5 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-full"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <a href="app.html" class="btn-glow inline-flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-500 text-obsidian-950 text-sm font-semibold hover:bg-emerald-400 transition-colors">
+            Open Full Dashboard
+            <i data-lucide="external-link" class="w-4 h-4"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FRAMEWORKS ===================== -->
+  <section id="frameworks" class="relative py-24 lg:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <p class="text-sm font-medium text-emerald-400 tracking-wider uppercase mb-3">Institutional Models</p>
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Battle-tested budgeting frameworks</h2>
+        <p class="text-gray-400">Toggle between proven models and instantly see how every dollar is allocated.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- 50/30/20 -->
+        <div class="glass rounded-2xl p-6 sm:p-8 border border-obsidian-600 hover:border-emerald-500/30 transition-colors">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-lg bg-emerald-500/15 flex items-center justify-center">
+              <span class="text-sm font-bold text-emerald-400">50</span>
+            </div>
+            <div>
+              <h3 class="font-semibold">50 / 30 / 20 Rule</h3>
+              <p class="text-xs text-gray-400">Classic balance</p>
+            </div>
+          </div>
+          <ul class="space-y-3 text-sm text-gray-400">
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> 50% Needs (housing, utilities, transport)</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-cyan-500"></span> 30% Wants (entertainment, dining)</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-obsidian-600 border border-gray-500"></span> 20% Savings & investments</li>
+          </ul>
+        </div>
+
+        <!-- Pay Yourself First -->
+        <div class="glass rounded-2xl p-6 sm:p-8 border border-obsidian-600 hover:border-cyan-500/30 transition-colors">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-lg bg-cyan-500/15 flex items-center justify-center">
+              <i data-lucide="piggy-bank" class="w-5 h-5 text-cyan-400"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold">Pay Yourself First</h3>
+              <p class="text-xs text-gray-400">Invest before spend</p>
+            </div>
+          </div>
+          <ul class="space-y-3 text-sm text-gray-400">
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-cyan-500"></span> 30% direct to investments</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Remaining covers needs & wants</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-obsidian-600 border border-gray-500"></span> Forces disciplined wealth building</li>
+          </ul>
+        </div>
+
+        <!-- Zero-Based -->
+        <div class="glass rounded-2xl p-6 sm:p-8 border border-obsidian-600 hover:border-emerald-500/30 transition-colors">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-10 h-10 rounded-lg bg-emerald-500/15 flex items-center justify-center">
+              <i data-lucide="equal" class="w-5 h-5 text-emerald-400"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold">Zero-Based Budgeting</h3>
+              <p class="text-xs text-gray-400">Every dollar assigned</p>
+            </div>
+          </div>
+          <ul class="space-y-3 text-sm text-gray-400">
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Income − Outgoings = $0</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-cyan-500"></span> Full intentional allocation</li>
+            <li class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-obsidian-600 border border-gray-500"></span> Maximum awareness & control</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CTA BANNER ===================== -->
+  <section class="relative py-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative glass-strong rounded-3xl p-10 sm:p-14 text-center overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-transparent to-cyan-500/10 pointer-events-none"></div>
+        <div class="relative">
+          <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Ready to take control?</h2>
+          <p class="text-gray-400 max-w-xl mx-auto mb-8">Open the full dashboard with sample data already loaded. Explore every module, then make it yours.</p>
+          <a href="app.html" class="btn-glow inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-emerald-500 text-obsidian-950 font-semibold text-base hover:bg-emerald-400 transition-all">
+            Launch Finora
+            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="border-t border-obsidian-600 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
+            <i data-lucide="trending-up" class="w-4 h-4 text-white"></i>
+          </div>
+          <span class="font-bold">Fino<span class="text-emerald-400">ra</span></span>
+        </div>
+
+        <p class="text-sm text-gray-400 text-center">
+          <span class="text-emerald-400/90 font-medium">Clarity for every dollar.</span><br />
+          Created and Engineered by <span class="text-gray-300 font-medium">Sumit Rajbanshi</span>
+        </p>
+
+        <div class="flex items-center gap-4 text-sm text-gray-400">
+          <a href="app.html" class="hover:text-emerald-400 transition-colors">Dashboard</a>
+          <span class="text-obsidian-600">|</span>
+          <a href="#features" class="hover:text-emerald-400 transition-colors">Features</a>
+        </div>
+      </div>
+      <p class="text-xs text-gray-400 text-center mt-8">Finora provides general information and calculators only — it is not financial advice. Projections are illustrative and not guaranteed.</p>
+    </div>
+  </footer>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script>
+    // ---------- Lucide icons ----------
+    lucide.createIcons();
+
+    // ---------- Count-up animation (0 -> target) ----------
+    const counters = Array.from(document.querySelectorAll('[data-count]'));
+    function fmtCounter(el, v) {
+      const d = parseInt(el.dataset.decimals || '0', 10);
+      return (el.dataset.prefix || '') +
+        v.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d }) +
+        (el.dataset.suffix || '');
+    }
+    counters.forEach(el => { el.textContent = fmtCounter(el, 0); }); // start at 0 while loader covers the page
+
+    function startCounters() {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const duration = 2200;
+      const t0 = performance.now();
+      function frame(now) {
+        const p = Math.min(1, (now - t0) / duration);
+        const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+        counters.forEach(el => {
+          el.textContent = fmtCounter(el, parseFloat(el.dataset.count) * eased);
+        });
+        if (p < 1) requestAnimationFrame(frame);
+      }
+      if (reduce) {
+        counters.forEach(el => { el.textContent = fmtCounter(el, parseFloat(el.dataset.count)); });
+      } else {
+        requestAnimationFrame(frame);
+      }
+    }
+
+    // ---------- Loader ----------
+    (function () {
+      const loader = document.getElementById('loader');
+      const bar = document.getElementById('loader-bar');
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.random() * 18 + 8;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          bar.style.width = '100%';
+          setTimeout(() => {
+            loader.classList.add('hidden');
+            startCounters(); // begin count-up as soon as the page is revealed
+            // Trigger slow text “come to light” after loader
+            document.querySelectorAll('.stagger, .hero-cards-reveal').forEach(el => {
+              el.classList.add('is-ready');
+            });
+          }, 150);
+        } else {
+          bar.style.width = progress + '%';
+        }
+      }, 70);
+    })();
+
+
+
+    // Restore page when returning via back/forward cache
+    window.addEventListener('pageshow', () => document.body.classList.remove('page-exit'));
+
+    // ---------- Navbar scroll effect ----------
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        navbar.classList.add('glass-strong', 'border-b', 'border-obsidian-600');
+      } else {
+        navbar.classList.remove('glass-strong', 'border-b', 'border-obsidian-600');
+      }
+    });
+
+    // ---------- Subtle parallax on background orbs ----------
+    (function () {
+      const layers = document.querySelectorAll('.parallax-layer');
+      if (!layers.length) return;
+      let ticking = false;
+      function update() {
+        const y = window.scrollY;
+        layers.forEach(el => {
+          const speed = parseFloat(el.dataset.speed) || 0.1;
+          el.style.transform = `translate3d(0, ${y * speed}px, 0)`;
+        });
+        ticking = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!ticking) {
+          requestAnimationFrame(update);
+          ticking = true;
+        }
+      }, { passive: true });
+    })();
+
+    // ---------- Soft particle field (hero only) ----------
+    (function () {
+      const canvas = document.getElementById('particle-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      let raf = null;
+      const COUNT = window.innerWidth < 640 ? 28 : 48;
+
+      function resize() {
+        const section = canvas.parentElement;
+        canvas.width = section.clientWidth;
+        canvas.height = section.clientHeight;
+      }
+
+      function init() {
+        resize();
+        particles = Array.from({ length: COUNT }, () => ({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.4,
+          vx: (Math.random() - 0.5) * 0.25,
+          vy: (Math.random() - 0.5) * 0.25,
+          a: Math.random() * 0.35 + 0.15
+        }));
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(16, 185, 129, ${p.a})`;
+          ctx.fill();
+        });
+        // faint links between nearby particles
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const a = particles[i], b = particles[j];
+            const dx = a.x - b.x, dy = a.y - b.y;
+            const d = Math.sqrt(dx * dx + dy * dy);
+            if (d < 110) {
+              ctx.beginPath();
+              ctx.moveTo(a.x, a.y);
+              ctx.lineTo(b.x, b.y);
+              ctx.strokeStyle = `rgba(6, 182, 212, ${0.08 * (1 - d / 110)})`;
+              ctx.stroke();
+            }
+          }
+        }
+        raf = requestAnimationFrame(draw);
+      }
+
+      init();
+      draw();
+      window.addEventListener('resize', () => { init(); }, { passive: true });
+      // pause when tab hidden
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) cancelAnimationFrame(raf);
+        else draw();
+      });
+    })();
+
+    // ---------- Mobile menu ----------
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      const icon = mobileBtn.querySelector('[data-lucide]');
+      if (mobileMenu.classList.contains('hidden')) {
+        mobileBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+      } else {
+        mobileBtn.innerHTML = '<i data-lucide="x" class="w-6 h-6"></i>';
+      }
+      lucide.createIcons();
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+        lucide.createIcons();
+      });
+    });
+
+    // ---------- Interactive income preview ----------
+    const slider = document.getElementById('income-slider');
+    const incomeDisplay = document.getElementById('income-display');
+    const needsAmount = document.getElementById('needs-amount');
+    const wantsAmount = document.getElementById('wants-amount');
+    const savingsAmount = document.getElementById('savings-amount');
+
+    function formatAUD(n) {
+      return '$' + Math.round(n).toLocaleString('en-AU');
+    }
+
+    function updatePreview() {
+      const income = parseInt(slider.value, 10);
+      incomeDisplay.textContent = formatAUD(income);
+      needsAmount.textContent = formatAUD(income * 0.5);
+      wantsAmount.textContent = formatAUD(income * 0.3);
+      savingsAmount.textContent = formatAUD(income * 0.2);
+    }
+
+    slider.addEventListener('input', updatePreview);
+    updatePreview();
+
+    // ---------- Smooth page transition on CTA ----------
+    document.querySelectorAll('a[href="app.html"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.body.classList.add('page-exit');
+        setTimeout(() => {
+          window.location.href = 'app.html';
+        }, 380);
+      });
+    });
+
+    // ---------- Intersection observer for fade-ins (optional polish) ----------
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('opacity-100', 'translate-y-0');
+          setTimeout(() => entry.target.classList.remove('transition-all', 'duration-700'), 800);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.tilt-card').forEach(el => {
+      el.classList.add('opacity-0', 'translate-y-6', 'transition-all', 'duration-700');
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
