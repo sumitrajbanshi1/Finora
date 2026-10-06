@@ -3,15 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Monexa Dashboard — Personal Finance OS</title>
+  <meta name="description" content="Monexa dashboard: track cash flow, apply budget frameworks, set goals, and project compound wealth." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2310b981'/%3E%3Cpath d='M7 21l6-6 4 4 8-9' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
   <meta name="theme-color" content="#0a0b0e" />
-  <title>Finora Dashboard — Clarity for every dollar</title>
-  <meta name="description" content="Finora dashboard — Clarity for every dollar. Track cash flow, apply budget frameworks, set goals, and project compound wealth." />
+  <meta name="color-scheme" content="dark" />
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+  <link rel="preconnect" href="https://unpkg.com" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    window.tailwind = window.tailwind || {};
     tailwind.config = {
       theme: {
         extend: {
@@ -27,8 +30,8 @@
       }
     }
   </script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script defer src="https://unpkg.com/lucide@latest"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #0a0b0e; }
@@ -86,13 +89,13 @@
 
     .cat-badge {
       display: inline-flex; align-items: center; gap: 6px;
-      padding: 4px 11px; border-radius: 999px; font-size: 11px; font-weight: 600;
+      padding: 4px 11px; border-radius: 999px; font-size: 0.6875rem; font-weight: 600;
       letter-spacing: 0.02em; white-space: nowrap;
       border: 1px solid rgba(255,255,255,0.06);
     }
     .type-badge {
       display: inline-flex; align-items: center; gap: 4px;
-      padding: 3px 9px; border-radius: 6px; font-size: 10px; font-weight: 700;
+      padding: 3px 9px; border-radius: 6px; font-size: 0.625rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.06em;
       border: 1px solid rgba(255,255,255,0.06);
     }
@@ -153,7 +156,7 @@
         align-items: center;
         gap: 2px;
         padding: 6px 2px;
-        font-size: 10px;
+        font-size: 0.625rem;
         color: #9ca3af;
         border-radius: 10px;
       }
@@ -171,36 +174,22 @@
       }
       .sidebar-link { min-height: 44px; }
     }
-
-    /* ===== Fixes: mobile / tablet / touch / safe areas ===== */
-    .grid > * { min-width: 0; }
-    html, body { max-width: 100%; overflow-x: clip; }
-    html { -webkit-text-size-adjust: 100%; }
-    body { overflow-x: hidden; }
-    a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
-    /* explicit positioning (does not depend on stylesheet order vs .glass { position: relative }) */
-    @media (max-width: 1023px) {
-      #sidebar { position: fixed; height: 100vh; height: 100dvh; padding-top: env(safe-area-inset-top, 0px); visibility: hidden; transition: transform 0.3s ease, visibility 0s linear 0.3s; }
-      #sidebar.open { visibility: visible; transition: transform 0.3s ease, visibility 0s; }
-      /* bottom nav is shown below 1024px, so reserve room for it on tablets too (was phones only) */
-      main { padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px)) !important; }
-      footer { padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px)) !important; }
-      #mobile-nav { padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); }
-      header button { min-width: 44px; min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
-    }
-    @media (min-width: 1024px) { #sidebar { position: sticky; height: 100vh; height: 100dvh; } }
-    header.sticky { padding-top: env(safe-area-inset-top, 0px); height: calc(4rem + env(safe-area-inset-top, 0px)); }
-    /* iOS zooms into any focused field under 16px - also affects iPads, so key off touch, not width */
-    @media (pointer: coarse) {
-      select, input[type="number"], input[type="text"], input[type="password"] { font-size: 16px !important; min-height: 44px; }
-      .tx-card button, #goals-list button { min-width: 40px; min-height: 40px; }
-    }
-    #ledger-chips { scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-    #ledger-chips::-webkit-scrollbar { display: none; }
-    #ledger-chips .cat-badge { flex-shrink: 0; min-height: 32px; }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
-    }
+  
+    /* ===== Responsive / performance layer ===== */
+    html{font-size:clamp(.875rem,.8rem + .4vw,1.0625rem);-webkit-text-size-adjust:100%;text-size-adjust:100%}
+    body{overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+    img,svg,canvas{max-width:100%}
+    .min-h-screen{min-height:100dvh!important}
+    .h-screen{height:100dvh!important}
+    .fluid-h1{font-size:clamp(2rem,5.2vw + .6rem,4rem)}
+    @media (max-width:639px){.glass,.glass-strong,.tilt-card,.hero-card-futuristic{backdrop-filter:none!important;-webkit-backdrop-filter:none!important;background:rgba(18,20,28,.94)!important}}
+    @media (pointer:coarse){#tx-table-body button,.tx-card button,#goals-list button{min-width:2.5rem;min-height:2.5rem;display:inline-flex;align-items:center;justify-content:center}}
+    @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+    @media (min-width:1536px){main>section{max-width:1400px;margin-inline:auto}}
+    header.sticky.top-0{height:calc(4rem + env(safe-area-inset-top,0px))!important;padding-top:env(safe-area-inset-top,0px)}
+      /* ===== Mobile overflow fix: grid items may shrink below their content ===== */
+    .grid{grid-template-columns:minmax(0,1fr)}
+    .grid>*,.stagger,.stagger>*,.flex>.min-w-0{min-width:0}
   </style>
 </head>
 <body class="bg-obsidian-950 text-white font-sans antialiased mesh-bg min-h-screen">
@@ -214,17 +203,17 @@
 
   <!-- Unlock modal -->
   <div id="unlock-modal" class="fixed inset-0 z-[60] hidden items-center justify-center modal-backdrop">
-    <div class="glass rounded-2xl p-6 w-full max-w-sm mx-4">
+    <div role="dialog" aria-modal="true" aria-labelledby="unlock-title" class="glass rounded-2xl p-6 w-full max-w-sm mx-4">
       <div class="flex items-center gap-3 mb-4">
         <div class="w-10 h-10 rounded-xl bg-amber-500/15 flex items-center justify-center">
           <i data-lucide="lock" class="w-5 h-5 text-amber-400"></i>
         </div>
         <div>
-          <h3 class="font-semibold text-sm">Goal is locked</h3>
-          <p class="text-xs text-gray-500">Enter unlock code to delete or edit</p>
+          <h3 id="unlock-title" class="font-semibold text-sm">Item is locked</h3>
+          <p class="text-xs text-gray-400">Enter unlock code to delete or edit</p>
         </div>
       </div>
-      <input id="unlock-pin" type="password" inputmode="numeric" maxlength="8" placeholder="Unlock code"
+      <input id="unlock-pin" type="password" inputmode="numeric" maxlength="8" placeholder="Unlock code" aria-label="Unlock code"
         class="w-full bg-obsidian-800 border border-obsidian-600 rounded-xl px-3 py-2.5 text-sm mb-3 focus:outline-none focus:border-amber-500" />
       <p id="unlock-error" class="text-xs text-red-400 hidden mb-2">Incorrect code</p>
       <div class="flex gap-2">
@@ -242,9 +231,9 @@
           <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
             <i data-lucide="trending-up" class="w-4 h-4 text-white"></i>
           </div>
-          <span class="font-bold text-sm">Fin<span class="text-emerald-400">ora</span></span>
+          <span class="font-bold text-sm">Mone<span class="text-emerald-400">xa</span></span>
         </a>
-        <button class="lg:hidden p-1.5 text-gray-400 hover:text-white" onclick="toggleSidebar()" aria-label="Close menu">
+        <button class="lg:hidden p-1.5 text-gray-400 hover:text-white" onclick="toggleSidebar()">
           <i data-lucide="x" class="w-5 h-5"></i>
         </button>
       </div>
@@ -268,25 +257,31 @@
       </nav>
 
       <div class="px-4 py-4 border-t border-obsidian-600 space-y-2">
+        <button id="btn-export-json" class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs text-gray-400 hover:text-white hover:bg-obsidian-800 transition-colors"><i data-lucide="download" class="w-3.5 h-3.5"></i> Export Backup (JSON)</button>
+        <button id="btn-import-json" class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs text-gray-400 hover:text-white hover:bg-obsidian-800 transition-colors"><i data-lucide="upload" class="w-3.5 h-3.5"></i> Import Backup</button>
+        <input id="import-file" type="file" accept="application/json" class="hidden" />
+        <button id="btn-clear" class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs text-gray-400 hover:text-red-400 hover:bg-obsidian-800 transition-colors"><i data-lucide="eraser" class="w-3.5 h-3.5"></i> Start Fresh (clear all)</button>
         <button id="btn-reset" class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs text-gray-400 hover:text-white hover:bg-obsidian-800 transition-colors">
           <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Reset Sample Data
         </button>
         <a href="index.html" class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs text-gray-400 hover:text-emerald-400 transition-colors">
           <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Home
         </a>
-        <p class="text-[10px] text-center text-gray-600 pt-1">Sumit Rajbanshi</p>
+        <p class="text-[0.625rem] text-center text-emerald-400/70 pt-1">Clarity for every dollar.</p>
+        <p class="text-[0.625rem] text-center text-gray-400">Sumit Rajbanshi</p>
       </div>
     </aside>
 
     <div class="flex-1 flex flex-col min-w-0">
       <header class="sticky top-0 z-30 h-16 flex items-center justify-between px-4 sm:px-6 border-b border-obsidian-600 bg-obsidian-950/80 backdrop-blur-xl">
         <div class="flex items-center gap-3">
-          <button class="lg:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-obsidian-800" onclick="toggleSidebar()" aria-label="Open menu">
+          <button class="lg:hidden p-2 rounded-lg text-gray-400 hover:text-white hover:bg-obsidian-800" onclick="toggleSidebar()">
             <i data-lucide="menu" class="w-5 h-5"></i>
           </button>
           <h1 id="page-title" class="text-lg font-semibold tracking-tight">Overview</h1>
         </div>
-        <div class="flex items-center gap-2 text-xs text-gray-500">
+        <div class="flex items-center gap-2 text-xs text-gray-400">
+          <select id="month-select" aria-label="Month" class="bg-obsidian-800 border border-obsidian-600 rounded-lg px-2 py-1.5 text-xs text-gray-200 focus:outline-none focus:border-emerald-500"></select>
           <span class="hidden sm:inline">AUD · Local storage</span>
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
         </div>
@@ -302,7 +297,7 @@
                 <div class="w-7 h-7 rounded-lg bg-emerald-500/20 flex items-center justify-center">
                   <i data-lucide="wallet" class="w-3.5 h-3.5 text-emerald-400"></i>
                 </div>
-                <p class="text-[11px] uppercase tracking-wider text-gray-400">Net Worth</p>
+                <p class="text-[0.6875rem] uppercase tracking-wider text-gray-400">Tracked Savings</p>
               </div>
               <p id="ticker-networth" class="text-xl sm:text-2xl font-bold tracking-tight text-white">$0</p>
             </div>
@@ -311,7 +306,7 @@
                 <div class="w-7 h-7 rounded-lg bg-emerald-500/20 flex items-center justify-center">
                   <i data-lucide="arrow-down-left" class="w-3.5 h-3.5 text-emerald-400"></i>
                 </div>
-                <p class="text-[11px] uppercase tracking-wider text-gray-400">Monthly Inflow</p>
+                <p class="text-[0.6875rem] uppercase tracking-wider text-gray-400">Monthly Inflow</p>
               </div>
               <p id="ticker-inflow" class="text-xl sm:text-2xl font-bold tracking-tight text-emerald-400">$0</p>
             </div>
@@ -320,7 +315,7 @@
                 <div class="w-7 h-7 rounded-lg bg-orange-500/20 flex items-center justify-center">
                   <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-orange-400"></i>
                 </div>
-                <p class="text-[11px] uppercase tracking-wider text-gray-400">Burn Rate</p>
+                <p class="text-[0.6875rem] uppercase tracking-wider text-gray-400">Burn Rate</p>
               </div>
               <p id="ticker-burn" class="text-xl sm:text-2xl font-bold tracking-tight text-orange-400">$0</p>
             </div>
@@ -329,7 +324,7 @@
                 <div class="w-7 h-7 rounded-lg bg-cyan-500/20 flex items-center justify-center">
                   <i data-lucide="percent" class="w-3.5 h-3.5 text-cyan-400"></i>
                 </div>
-                <p class="text-[11px] uppercase tracking-wider text-gray-400">Savings Rate</p>
+                <p class="text-[0.6875rem] uppercase tracking-wider text-gray-400">Savings Rate</p>
               </div>
               <p id="ticker-savings" class="text-xl sm:text-2xl font-bold tracking-tight text-cyan-400">0%</p>
             </div>
@@ -340,8 +335,9 @@
               <h3 class="text-sm font-semibold mb-4 flex items-center gap-2">
                 <i data-lucide="pie-chart" class="w-4 h-4 text-emerald-400"></i> Expense Breakdown
               </h3>
-              <div class="relative h-72 sm:h-72">
+              <div class="relative h-56 sm:h-64">
                 <canvas id="chart-expenses"></canvas>
+                <p id="chart-empty" class="hidden absolute inset-0 flex items-center justify-center text-gray-400 text-sm">No expense data this period</p>
               </div>
             </div>
 
@@ -373,24 +369,26 @@
             <h3 class="text-sm font-semibold mb-4 flex items-center gap-2">
               <i data-lucide="plus-circle" class="w-4 h-4 text-emerald-400"></i> Add Transaction
             </h3>
-            <form id="tx-form" class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
+            <form id="tx-form" class="grid sm:grid-cols-2 lg:grid-cols-6 gap-3">
               <select id="tx-type" class="bg-obsidian-800 border border-obsidian-600 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
                 <option value="expense">Expense</option>
                 <option value="income">Income</option>
               </select>
               <select id="tx-category" class="bg-obsidian-800 border border-obsidian-600 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-emerald-500"></select>
-              <input id="tx-amount" type="number" step="0.01" min="0" placeholder="Amount (AUD)" required
+              <input id="tx-amount" type="number" step="0.01" min="0" placeholder="Amount (AUD)" aria-label="Amount (AUD)" required
                 class="bg-obsidian-800 border border-obsidian-600 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-emerald-500" />
-              <input id="tx-note" type="text" placeholder="Note (optional)"
+              <input id="tx-date" type="date" aria-label="Date" class="bg-obsidian-800 border border-obsidian-600 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-emerald-500" />
+              <input id="tx-note" type="text" placeholder="Note (optional)" aria-label="Note (optional)"
                 class="bg-obsidian-800 border border-obsidian-600 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-emerald-500" />
-              <button type="submit" class="bg-emerald-500 hover:bg-emerald-400 text-obsidian-950 font-semibold rounded-xl px-4 py-2.5 text-sm transition-colors flex items-center justify-center gap-2">
-                <i data-lucide="plus" class="w-4 h-4"></i> Add
+              <button type="submit" id="tx-submit" class="bg-emerald-500 hover:bg-emerald-400 text-obsidian-950 font-semibold rounded-xl px-4 py-2.5 text-sm transition-colors flex items-center justify-center gap-2">
+                <i data-lucide="plus" class="w-4 h-4"></i> <span id="tx-submit-label">Add</span>
               </button>
+              <button type="button" id="tx-cancel" onclick="cancelEditTx()" class="hidden text-xs text-gray-400 hover:text-white underline">Cancel edit</button>
             </form>
           </div>
 
           <!-- Category filter chips -->
-          <div class="flex gap-2 overflow-x-auto sm:flex-wrap sm:overflow-visible pb-1 -mx-4 px-4 sm:mx-0 sm:px-0" id="ledger-chips"></div>
+          <div class="flex flex-wrap gap-2" id="ledger-chips"></div>
 
           <div class="glass rounded-2xl p-4 sm:p-6">
             <div class="flex flex-col gap-3 mb-4">
@@ -403,6 +401,7 @@
                 </button>
               </div>
               <div class="flex gap-2">
+                <input id="filter-search" type="search" placeholder="Search notes…" aria-label="Search notes…" class="flex-1 min-w-0 bg-obsidian-800 border border-obsidian-600 rounded-lg px-2.5 py-2 text-xs focus:outline-none" />
                 <select id="filter-type" class="flex-1 bg-obsidian-800 border border-obsidian-600 rounded-lg px-2.5 py-2 text-xs focus:outline-none">
                   <option value="all">All types</option>
                   <option value="income">Income</option>
@@ -418,7 +417,7 @@
             <div class="desktop-table overflow-x-auto -mx-1">
               <table class="w-full text-sm min-w-[560px]">
                 <thead>
-                  <tr class="text-left text-[11px] uppercase tracking-wider text-gray-500 border-b border-obsidian-600">
+                  <tr class="text-left text-[0.6875rem] uppercase tracking-wider text-gray-400 border-b border-obsidian-600">
                     <th class="pb-3 pr-3 font-medium">Date</th>
                     <th class="pb-3 pr-3 font-medium">Type</th>
                     <th class="pb-3 pr-3 font-medium">Category</th>
@@ -434,7 +433,7 @@
             <!-- Mobile cards -->
             <div id="tx-mobile-cards" class="mobile-cards space-y-2.5"></div>
 
-            <p id="tx-empty" class="hidden text-center text-gray-500 text-sm py-8">No transactions yet.</p>
+            <p id="tx-empty" class="hidden text-center text-gray-400 text-sm py-8">No transactions yet.</p>
           </div>
         </section>
 
@@ -461,7 +460,7 @@
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6">
               <div>
                 <h3 class="text-sm font-semibold mb-1">Monthly Income for Allocation</h3>
-                <p class="text-xs text-gray-500">Synced from ledger income — override anytime</p>
+                <p class="text-xs text-gray-400">Synced from ledger income — override anytime</p>
               </div>
               <div class="flex items-center gap-3">
                 <span class="text-sm text-gray-400">AUD</span>
@@ -471,38 +470,39 @@
             </div>
 
             <!-- Model selector cards -->
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6" id="model-cards"></div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-6" id="model-cards"></div>
 
             <!-- Insight panel -->
             <div id="model-insight" class="rounded-xl bg-obsidian-800/60 border border-obsidian-600 p-4 mb-6 text-sm"></div>
 
             <!-- Allocation results -->
             <div id="budget-results" class="grid sm:grid-cols-3 gap-4 mb-6"></div>
+            <div id="budget-actual" class="rounded-xl bg-obsidian-800/60 border border-obsidian-600 p-4 mb-6"></div>
 
             <!-- Custom model builder (hidden by default) -->
             <div id="custom-builder" class="hidden rounded-xl border border-dashed border-cyan-500/40 bg-cyan-500/5 p-5 space-y-4">
               <h4 class="text-sm font-semibold flex items-center gap-2">
                 <i data-lucide="sliders" class="w-4 h-4 text-cyan-400"></i> Custom Model Builder
               </h4>
-              <p class="text-xs text-gray-500">Set your own percentages. They must total 100%.</p>
+              <p class="text-xs text-gray-400">Set your own percentages. They must total 100%.</p>
               <div class="grid sm:grid-cols-3 gap-4">
                 <div>
-                  <label class="text-[11px] text-gray-400 mb-1 block">Needs %</label>
+                  <label class="text-[0.6875rem] text-gray-400 mb-1 block">Needs %</label>
                   <input id="custom-needs" type="number" min="0" max="100" value="50"
                     class="w-full bg-obsidian-800 border border-obsidian-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-cyan-500" />
                 </div>
                 <div>
-                  <label class="text-[11px] text-gray-400 mb-1 block">Wants %</label>
+                  <label class="text-[0.6875rem] text-gray-400 mb-1 block">Wants %</label>
                   <input id="custom-wants" type="number" min="0" max="100" value="30"
                     class="w-full bg-obsidian-800 border border-obsidian-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-cyan-500" />
                 </div>
                 <div>
-                  <label class="text-[11px] text-gray-400 mb-1 block">Savings / Invest %</label>
+                  <label class="text-[0.6875rem] text-gray-400 mb-1 block">Savings / Invest %</label>
                   <input id="custom-savings" type="number" min="0" max="100" value="20"
                     class="w-full bg-obsidian-800 border border-obsidian-600 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-cyan-500" />
                 </div>
               </div>
-              <p id="custom-total-msg" class="text-xs text-gray-500">Total: 100%</p>
+              <p id="custom-total-msg" class="text-xs text-gray-400">Total: 100%</p>
               <button id="btn-apply-custom" class="px-4 py-2 rounded-xl text-sm font-semibold bg-cyan-500 text-obsidian-950 hover:bg-cyan-400 transition-colors">
                 Apply Custom Split
               </button>
@@ -512,9 +512,9 @@
           <div class="glass rounded-2xl p-5 sm:p-6">
             <h3 class="text-sm font-semibold mb-4">Side-by-side comparison</h3>
             <div class="overflow-x-auto">
-              <table class="w-full text-sm min-w-[460px]">
+              <table class="w-full text-sm">
                 <thead>
-                  <tr class="text-left text-[11px] uppercase tracking-wider text-gray-500 border-b border-obsidian-600">
+                  <tr class="text-left text-[0.6875rem] uppercase tracking-wider text-gray-400 border-b border-obsidian-600">
                     <th class="pb-3 font-medium">Bucket</th>
                     <th class="pb-3 font-medium text-right">50/30/20</th>
                     <th class="pb-3 font-medium text-right">Pay First</th>
@@ -534,24 +534,25 @@
             <h3 class="text-sm font-semibold mb-4 flex items-center gap-2">
               <i data-lucide="plus-circle" class="w-4 h-4 text-amber-400"></i> Add Goal
             </h3>
-            <form id="goal-form" class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
-              <input id="goal-name" type="text" placeholder="Goal name" required
+            <form id="goal-form" class="grid sm:grid-cols-2 lg:grid-cols-6 gap-3">
+              <input id="goal-name" type="text" placeholder="Goal name" aria-label="Goal name" required
                 class="bg-obsidian-800 border border-obsidian-600 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-amber-500" />
-              <input id="goal-target" type="number" step="100" min="1" placeholder="Target (AUD)" required
+              <input id="goal-target" type="number" step="100" min="1" placeholder="Target (AUD)" aria-label="Target (AUD)" required
                 class="bg-obsidian-800 border border-obsidian-600 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-amber-500" />
-              <input id="goal-current" type="number" step="100" min="0" placeholder="Current saved" value="0"
+              <input id="goal-current" type="number" step="100" min="0" placeholder="Current saved" aria-label="Current saved" value="0"
                 class="bg-obsidian-800 border border-obsidian-600 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-amber-500" />
+              <input id="goal-date" type="date" aria-label="Target date (optional)" class="bg-obsidian-800 border border-obsidian-600 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-amber-500" />
               <label class="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-obsidian-800 border border-obsidian-600 text-xs text-gray-400 cursor-pointer">
-                <input id="goal-lock" type="checkbox" class="rounded border-obsidian-600 text-amber-500 focus:ring-amber-500" />
-                <i data-lucide="lock" class="w-3.5 h-3.5 text-amber-400"></i> Lock on create
+                <input id="goal-lock" type="checkbox" checked class="rounded border-obsidian-600 text-amber-500 focus:ring-amber-500" />
+                <i data-lucide="lock" class="w-3.5 h-3.5 text-amber-400"></i> Locked by default
               </label>
               <button type="submit" class="bg-amber-500 hover:bg-amber-400 text-obsidian-950 font-semibold rounded-xl px-4 py-2.5 text-sm transition-colors">
                 Add Goal
               </button>
             </form>
-            <p class="text-[11px] text-gray-500 mt-3 flex items-center gap-1.5">
+            <p class="text-[0.6875rem] text-gray-400 mt-3 flex items-center gap-1.5">
               <i data-lucide="shield" class="w-3 h-3"></i>
-              Locked goals require an unlock code before delete or progress edits — protects against accidents.
+              Locked goals and ledger transactions require an unlock code before delete or edit — protects against accidents.
             </p>
           </div>
 
@@ -564,41 +565,50 @@
             <h3 class="text-sm font-semibold mb-5 flex items-center gap-2">
               <i data-lucide="line-chart" class="w-4 h-4 text-cyan-400"></i> Compound Interest Simulator
             </h3>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
               <div>
-                <label class="text-[11px] uppercase tracking-wider text-gray-500 mb-1.5 block">Initial Capital (AUD)</label>
+                <label class="text-[0.6875rem] uppercase tracking-wider text-gray-400 mb-1.5 block">Initial Capital (AUD)</label>
                 <input id="proj-initial" type="number" value="25000" min="0" step="500"
                   class="w-full bg-obsidian-800 border border-obsidian-600 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-cyan-500" />
               </div>
               <div>
-                <label class="text-[11px] uppercase tracking-wider text-gray-500 mb-1.5 block">Monthly Contribution</label>
+                <label class="text-[0.6875rem] uppercase tracking-wider text-gray-400 mb-1.5 block">Monthly Contribution</label>
                 <input id="proj-monthly" type="number" value="1200" min="0" step="50"
                   class="w-full bg-obsidian-800 border border-obsidian-600 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-cyan-500" />
               </div>
               <div>
-                <label class="text-[11px] uppercase tracking-wider text-gray-500 mb-1.5 block">Annual CAGR %</label>
+                <label class="text-[0.6875rem] uppercase tracking-wider text-gray-400 mb-1.5 block">Nominal annual return % (compounded monthly)</label>
                 <input id="proj-rate" type="number" value="8" min="0" max="30" step="0.5"
                   class="w-full bg-obsidian-800 border border-obsidian-600 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-cyan-500" />
               </div>
               <div>
-                <label class="text-[11px] uppercase tracking-wider text-gray-500 mb-1.5 block">Years</label>
+                <label class="text-[0.6875rem] uppercase tracking-wider text-gray-400 mb-1.5 block">Inflation % / yr</label>
+                <input id="proj-inflation" type="number" value="2.5" min="0" max="20" step="0.1"
+                  class="w-full bg-obsidian-800 border border-obsidian-600 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-cyan-500" />
+              </div>
+              <div>
+                <label class="text-[0.6875rem] uppercase tracking-wider text-gray-400 mb-1.5 block">Years</label>
                 <input id="proj-years" type="number" value="10" min="1" max="40" step="1"
                   class="w-full bg-obsidian-800 border border-obsidian-600 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:border-cyan-500" />
               </div>
             </div>
 
-            <div class="grid sm:grid-cols-3 gap-4 mb-6">
+            <div class="grid sm:grid-cols-4 gap-4 mb-6">
               <div class="rounded-xl bg-obsidian-800/80 border border-obsidian-600 p-4 text-center">
-                <p class="text-[11px] text-gray-500 uppercase mb-1">Future Value</p>
+                <p class="text-[0.6875rem] text-gray-400 uppercase mb-1">Future Value</p>
                 <p id="proj-fv" class="text-xl font-bold text-emerald-400">$0</p>
               </div>
               <div class="rounded-xl bg-obsidian-800/80 border border-obsidian-600 p-4 text-center">
-                <p class="text-[11px] text-gray-500 uppercase mb-1">Total Contributed</p>
+                <p class="text-[0.6875rem] text-gray-400 uppercase mb-1">Total Contributed</p>
                 <p id="proj-contributed" class="text-xl font-bold text-cyan-400">$0</p>
               </div>
               <div class="rounded-xl bg-obsidian-800/80 border border-obsidian-600 p-4 text-center">
-                <p class="text-[11px] text-gray-500 uppercase mb-1">Interest Earned</p>
+                <p class="text-[0.6875rem] text-gray-400 uppercase mb-1">Interest Earned</p>
                 <p id="proj-interest" class="text-xl font-bold text-white">$0</p>
+              </div>
+              <div class="rounded-xl bg-obsidian-800/80 border border-obsidian-600 p-4 text-center">
+                <p class="text-[0.6875rem] text-gray-400 uppercase mb-1">In Today's Dollars</p>
+                <p id="proj-real" class="text-xl font-bold text-amber-400">$0</p>
               </div>
             </div>
 
@@ -610,15 +620,14 @@
 
       </main>
 
-      <footer class="border-t border-obsidian-600 py-4 px-6 text-center text-xs text-gray-600">
+      <footer class="border-t border-obsidian-600 py-4 px-6 text-center text-xs text-gray-400">
         Created and Engineered by <span class="text-gray-400">Sumit Rajbanshi</span>
       </footer>
     </div>
   </div>
 
   <script>
-    function safeIcons() { try { if (window.lucide) window.lucide.createIcons(); } catch (e) {} }
-
+    document.addEventListener('DOMContentLoaded', () => {
     // ========== DESIGN TOKENS ==========
     /* Brighter, eye-friendly palette — no purple. Higher bg opacity for visibility on dark UI. */
     const CAT_META = {
@@ -635,7 +644,9 @@
       'Miscellaneous':             { color: '#94a3b8', bg: 'rgba(148,163,184,0.28)', icon: 'more-horizontal' },
     };
 
-    const STORAGE_KEY = 'aurawealth_v1';
+    const STORAGE_KEY = 'monexa_v1';
+    const LEGACY_KEY = 'aurawealth_v1'; // migrate existing data from pre-rebrand
+    const BUCKET = { 'Housing / Rent':'needs','Car Rent / Transport':'needs','Insurance':'needs','Utilities':'needs','Groceries':'needs','Entertainment':'wants','Miscellaneous':'wants','Investments':'savings' };
     const LOCK_CODE = String(0x802); // obfuscated constant — do not display
     const CATEGORIES = {
       income: ['Salary', 'Investments', 'Freelance / Side Hustle', 'Other'],
@@ -661,6 +672,12 @@
         insight: 'A more realistic split for high cost-of-living cities (e.g. Sydney, Melbourne). 60% needs, 20% wants, 20% savings. Use this when rent and essentials consume more than half your income and the classic 50% needs bucket is too tight.',
         splits: { needs: 60, wants: 20, savings: 20 }
       },
+      'zerobased': {
+        name: 'Zero-Based',
+        short: 'Every dollar assigned',
+        insight: 'Income minus outgoings equals zero: your real Needs and Wants spending for the month is taken from the ledger, and every remaining dollar is assigned to Savings / Investing — nothing is left unallocated. Select a month to use that month\'s actuals.',
+        splits: { needs: 0, wants: 0, savings: 100 }
+      },
       'custom': {
         name: 'Custom',
         short: 'Your own rules',
@@ -685,12 +702,16 @@
       goals: [
         { id: 'g1', name: 'Emergency Fund', target: 25000, current: 14200, locked: true },
         { id: 'g2', name: 'House Deposit', target: 80000, current: 28500, locked: true },
-        { id: 'g3', name: 'Travel 2027', target: 6000, current: 2100, locked: false },
+        { id: 'g3', name: 'Travel 2027', target: 6000, current: 2100, locked: true },
       ],
       customSplits: { needs: 50, wants: 30, savings: 20 }
     };
 
     let state = loadState();
+    let viewMonth = 'all';
+    let incomeAuto = true;
+    let editingTxId = null;
+    let unlockOpener = null;
     let expenseChart = null;
     let projectionChart = null;
     let activeBudgetModel = '503020';
@@ -698,41 +719,82 @@
 
     function loadState() {
       try {
-        const raw = localStorage.getItem(STORAGE_KEY);
+        const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('tallyra_v1') || localStorage.getItem('finora_v1') || localStorage.getItem(LEGACY_KEY);
         if (raw) {
           const parsed = JSON.parse(raw);
-          if (!parsed || typeof parsed !== 'object') throw new Error('bad state');
-          if (!Array.isArray(parsed.transactions)) parsed.transactions = [];
-          if (!Array.isArray(parsed.goals)) parsed.goals = [];
           // migrate older goals without locked flag
-          if (parsed.goals) parsed.goals.forEach(g => { if (g.locked === undefined) g.locked = false; });
+          sanitizeState(parsed);
+          normalizeState(parsed);
           if (!parsed.customSplits) parsed.customSplits = { needs: 50, wants: 30, savings: 20 };
           return parsed;
         }
       } catch (e) {}
-      return JSON.parse(JSON.stringify(SAMPLE));
+      const fresh = JSON.parse(JSON.stringify(SAMPLE));
+      normalizeState(fresh);
+      return fresh;
+    }
+
+    function sanitizeState(st) {
+      const cats = new Set([...CATEGORIES.income, ...CATEGORIES.expense]);
+      const idOk = v => typeof v === 'string' && /^[\w-]{1,40}$/.test(v);
+      const dateOk = v => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v);
+      st.transactions = (Array.isArray(st.transactions) ? st.transactions : []).filter(t => t && Number.isFinite(+t.amount) && +t.amount > 0).map(t => ({
+        id: idOk(t.id) ? t.id : uid(), type: t.type === 'income' ? 'income' : 'expense',
+        category: cats.has(t.category) ? t.category : 'Miscellaneous', amount: +t.amount,
+        note: String(t.note || '').slice(0, 200), date: dateOk(t.date) ? t.date : todayStr(), locked: t.locked }));
+      st.goals = (Array.isArray(st.goals) ? st.goals : []).filter(g => g && Number.isFinite(+g.target) && +g.target > 0).map(g => ({
+        id: idOk(g.id) ? g.id : uid(), name: String(g.name || 'Goal').slice(0, 80), target: +g.target,
+        current: Math.max(0, +g.current || 0), locked: g.locked, targetDate: dateOk(g.targetDate) ? g.targetDate : '' }));
+      const c = st.customSplits;
+      st.customSplits = (c && [c.needs, c.wants, c.savings].every(Number.isFinite) && c.needs + c.wants + c.savings === 100)
+        ? { needs: c.needs, wants: c.wants, savings: c.savings } : { needs: 50, wants: 30, savings: 20 };
+    }
+
+    // Everything deletable is locked by default (missing flag => locked)
+    function normalizeState(st) {
+      (st.goals || []).forEach(g => { if (g.locked === undefined) g.locked = true; });
+      (st.transactions || []).forEach(t => { if (t.locked === undefined) t.locked = true; });
     }
 
     function saveState() {
       try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-      catch (e) { console.warn('Could not save (private mode or storage full):', e); }
+      catch (e) { alert('Could not save — browser storage is full or disabled. Export a backup to keep your data.'); }
     }
 
     function formatAUD(n) {
-      return '$' + Math.round(n).toLocaleString('en-AU');
+      const cents = Math.abs(n % 1) > 0.004;
+      return (n < 0 ? '-$' : '$') + Math.abs(n).toLocaleString('en-AU', { minimumFractionDigits: cents ? 2 : 0, maximumFractionDigits: 2 });
     }
-
-    // Escape user-entered text before it goes into innerHTML (notes / goal names were injected raw)
     function esc(v) {
       return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
     }
-    // Local calendar date (toISOString() is UTC and gave the wrong day for AU users before 10-11am)
+    function toast(msg) {
+      const t = document.createElement('div');
+      t.textContent = msg; t.setAttribute('role', 'status');
+      t.className = 'fixed left-1/2 -translate-x-1/2 bottom-24 lg:bottom-8 z-[70] px-4 py-2 rounded-full bg-emerald-500 text-obsidian-950 text-sm font-semibold shadow-lg';
+      document.body.appendChild(t); setTimeout(() => t.remove(), 1800);
+    }
     function todayStr() {
       const d = new Date();
       return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
     }
-    function pctOf(g) {
-      return g.target > 0 ? Math.min(100, Math.max(0, (g.current / g.target) * 100)) : 0;
+    function monthOf(t) { return (t.date || '').slice(0, 7); }
+    function monthLabel(m) { return new Date(m + '-01T00:00:00').toLocaleDateString('en-AU', { month: 'short', year: 'numeric' }); }
+    function allMonths() { return [...new Set(state.transactions.map(monthOf).filter(Boolean))].sort().reverse(); }
+    function latestMonth() { return allMonths()[0] || null; }
+    function txFor(month) { return month === 'all' ? state.transactions : state.transactions.filter(t => monthOf(t) === month); }
+    function visibleTx() { return txFor(viewMonth); }
+    function renderMonthSelect() {
+      const months = allMonths();
+      if (viewMonth !== 'all' && !months.includes(viewMonth)) viewMonth = months[0] || 'all';
+      const sel = document.getElementById('month-select');
+      sel.innerHTML = '<option value="all">All time</option>' + months.map(m => `<option value="${m}">${monthLabel(m)}</option>`).join('');
+      sel.value = viewMonth;
+    }
+    function syncBudgetIncome() {
+      if (!incomeAuto || viewMonth === 'all') return;
+      const t = calcTotals();
+      if (t.income > 0) document.getElementById('budget-income').value = Math.round(t.income * 100) / 100;
     }
 
     function uid() {
@@ -745,7 +807,7 @@
 
     function catBadge(name) {
       const m = catMeta(name);
-      return `<span class="cat-badge" style="color:${m.color};background:${m.bg}"><i data-lucide="${m.icon}" class="w-3 h-3"></i>${esc(name)}</span>`;
+      return `<span class="cat-badge" style="color:${m.color};background:${m.bg}"><i data-lucide="${m.icon}" class="w-3 h-3"></i>${name}</span>`;
     }
 
     function typeBadge(type) {
@@ -756,21 +818,19 @@
     }
 
     // ========== CALCULATIONS ==========
-    function calcTotals() {
-      let income = 0, expenses = 0;
-      const byCat = {};
-      state.transactions.forEach(t => {
-        if (t.type === 'income') income += t.amount;
-        else {
-          expenses += t.amount;
-          byCat[t.category] = (byCat[t.category] || 0) + t.amount;
-        }
+    function calcTotals(month) {
+      let income = 0, burn = 0, invested = 0;
+      const byCat = {}, bucket = { needs: 0, wants: 0, savings: 0 };
+      txFor(month === undefined ? viewMonth : month).forEach(t => {
+        if (t.type === 'income') { income += t.amount; return; }
+        byCat[t.category] = (byCat[t.category] || 0) + t.amount;
+        bucket[BUCKET[t.category] || 'wants'] += t.amount;
+        if (t.category === 'Investments') invested += t.amount; else burn += t.amount;
       });
-      const savings = income - expenses;
+      const savings = income - burn; // everything not spent, incl. money invested
       const rate = income > 0 ? (savings / income) * 100 : 0;
       const goalProgress = state.goals.reduce((s, g) => s + g.current, 0);
-      const netWorth = savings + goalProgress;
-      return { income, expenses, savings, rate, byCat, netWorth, goalProgress };
+      return { income, expenses: burn, invested, savings, rate, byCat, bucket, netWorth: goalProgress, goalProgress };
     }
 
     // ========== TICKERS ==========
@@ -791,19 +851,11 @@
 
       const ctx = document.getElementById('chart-expenses');
       if (!ctx) return;
-      if (expenseChart) { expenseChart.destroy(); expenseChart = null; }
+      if (expenseChart) expenseChart.destroy();
 
-      let empty = document.getElementById('chart-expenses-empty');
-      if (!empty) {
-        empty = document.createElement('p');
-        empty.id = 'chart-expenses-empty';
-        empty.className = 'absolute inset-0 items-center justify-center text-center text-gray-500 text-sm';
-        empty.textContent = 'No expense data yet';
-        ctx.parentElement.appendChild(empty);
-      }
-      empty.style.display = labels.length ? 'none' : 'flex';
-      ctx.style.display = labels.length ? '' : 'none';
-      if (!labels.length || typeof Chart === 'undefined') return;
+      document.getElementById('chart-empty').classList.toggle('hidden', labels.length > 0);
+      ctx.classList.toggle('hidden', !labels.length);
+      if (!labels.length) { expenseChart = null; return; }
 
       expenseChart = new Chart(ctx, {
         type: 'doughnut',
@@ -823,7 +875,7 @@
           plugins: {
             legend: {
               position: 'bottom',
-              labels: { color: '#9ca3af', boxWidth: 10, padding: 10, font: { size: 11 } }
+              labels: { color: '#9ca3af', boxWidth: 12, padding: 12, font: { size: 11 } }
             }
           },
           cutout: '62%'
@@ -834,9 +886,9 @@
     // ========== RECENT ==========
     function renderRecent() {
       const list = document.getElementById('recent-list');
-      const sorted = [...state.transactions].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 6);
+      const sorted = [...visibleTx()].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 6);
       if (!sorted.length) {
-        list.innerHTML = '<p class="text-sm text-gray-500">No transactions</p>';
+        list.innerHTML = '<p class="text-sm text-gray-400">No transactions</p>';
         return;
       }
       list.innerHTML = sorted.map(t => {
@@ -851,7 +903,7 @@
                 ${catBadge(t.category)}
                 ${typeBadge(t.type)}
               </div>
-              <p class="text-[11px] text-gray-500 mt-1 truncate">${esc(t.date)}${t.note ? ' · ' + esc(t.note) : ''}</p>
+              <p class="text-[0.6875rem] text-gray-400 mt-1 truncate">${t.date}${t.note ? ' · ' + esc(t.note) : ''}</p>
             </div>
             <span class="text-sm font-semibold whitespace-nowrap ${t.type === 'income' ? 'text-emerald-400' : 'text-orange-400'}">
               ${t.type === 'income' ? '+' : '−'}${formatAUD(t.amount)}
@@ -859,18 +911,18 @@
           </div>
         `;
       }).join('');
-      safeIcons();
+      lucide.createIcons();
     }
 
     // ========== GOALS ==========
     function renderGoalsSnapshot() {
       const el = document.getElementById('goals-snapshot');
       if (!state.goals.length) {
-        el.innerHTML = '<p class="text-sm text-gray-500 col-span-full">No goals yet</p>';
+        el.innerHTML = '<p class="text-sm text-gray-400 col-span-full">No goals yet</p>';
         return;
       }
       el.innerHTML = state.goals.map(g => {
-        const pct = pctOf(g);
+        const pct = Math.min(100, (g.current / g.target) * 100);
         return `
           <div class="rounded-xl bg-obsidian-800/60 border border-obsidian-600 p-4">
             <div class="flex justify-between items-center text-sm mb-2">
@@ -883,21 +935,31 @@
             <div class="h-1.5 bg-obsidian-600 rounded-full overflow-hidden mb-2">
               <div class="h-full bg-gradient-to-r from-amber-500 to-emerald-500 rounded-full" style="width:${pct}%"></div>
             </div>
-            <p class="text-xs text-gray-500">${formatAUD(g.current)} / ${formatAUD(g.target)}</p>
+            <p class="text-xs text-gray-400">${formatAUD(g.current)} / ${formatAUD(g.target)}</p>
           </div>
         `;
       }).join('');
-      safeIcons();
+      lucide.createIcons();
+    }
+
+    function goalNeed(g) {
+      if (!g.targetDate) return '';
+      const rem = Math.max(0, g.target - g.current);
+      if (rem === 0) return '<p class="text-[0.6875rem] text-emerald-400 mt-1">Goal reached 🎉</p>';
+      const now = new Date(), d = new Date(g.targetDate + 'T00:00:00');
+      const months = (d.getFullYear() - now.getFullYear()) * 12 + (d.getMonth() - now.getMonth());
+      if (months <= 0) return `<p class="text-[0.6875rem] text-red-400 mt-1">Target date passed — ${formatAUD(rem)} still to go</p>`;
+      return `<p class="text-[0.6875rem] text-cyan-400 mt-1">Save ${formatAUD(Math.ceil(rem / months))}/mo to reach this by ${esc(g.targetDate)} (${months} mo)</p>`;
     }
 
     function renderGoalsList() {
       const el = document.getElementById('goals-list');
       if (!state.goals.length) {
-        el.innerHTML = '<p class="text-sm text-gray-500 col-span-full text-center py-8">No goals yet. Add one above.</p>';
+        el.innerHTML = '<p class="text-sm text-gray-400 col-span-full text-center py-8">No goals yet. Add one above.</p>';
         return;
       }
       el.innerHTML = state.goals.map(g => {
-        const pct = pctOf(g);
+        const pct = Math.min(100, (g.current / g.target) * 100);
         return `
           <div class="glass rounded-2xl p-5 ${g.locked ? 'ring-1 ring-amber-500/20' : ''}">
             <div class="flex items-start justify-between mb-3">
@@ -905,16 +967,16 @@
                 <h4 class="font-semibold flex items-center gap-2">
                   ${esc(g.name)}
                   ${g.locked
-                    ? '<span class="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400"><i data-lucide="lock" class="w-3 h-3"></i>Locked</span>'
-                    : '<span class="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-obsidian-600 text-gray-400"><i data-lucide="unlock" class="w-3 h-3"></i>Open</span>'}
+                    ? '<span class="inline-flex items-center gap-1 text-[0.625rem] uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400"><i data-lucide="lock" class="w-3 h-3"></i>Locked</span>'
+                    : '<span class="inline-flex items-center gap-1 text-[0.625rem] uppercase tracking-wider px-2 py-0.5 rounded-full bg-obsidian-600 text-gray-400"><i data-lucide="unlock" class="w-3 h-3"></i>Open</span>'}
                 </h4>
-                <p class="text-xs text-gray-500 mt-0.5">${formatAUD(g.current)} of ${formatAUD(g.target)}</p>
+                <p class="text-xs text-gray-400 mt-0.5">${formatAUD(g.current)} of ${formatAUD(g.target)}</p>
               </div>
               <div class="flex items-center gap-1">
-                <button onclick="toggleGoalLock('${g.id}')" class="p-1.5 text-gray-500 hover:text-amber-400 transition-colors" title="${g.locked ? 'Unlock' : 'Lock'}">
+                <button onclick="toggleGoalLock('${g.id}')" class="p-1.5 text-gray-400 hover:text-amber-400 transition-colors" title="${g.locked ? 'Unlock' : 'Lock'}">
                   <i data-lucide="${g.locked ? 'lock' : 'unlock'}" class="w-4 h-4"></i>
                 </button>
-                <button onclick="requestDeleteGoal('${g.id}')" class="p-1.5 text-gray-500 hover:text-red-400 transition-colors" title="Delete">
+                <button onclick="requestDeleteGoal('${g.id}')" class="p-1.5 text-gray-400 hover:text-red-400 transition-colors" title="Delete">
                   <i data-lucide="trash-2" class="w-4 h-4"></i>
                 </button>
               </div>
@@ -924,16 +986,17 @@
             </div>
             <div class="flex items-center gap-2">
               <input type="number" min="0" step="50" value="${g.current}" data-goal-id="${g.id}"
-                class="goal-current-input flex-1 bg-obsidian-800 border border-obsidian-600 rounded-lg px-2.5 py-1.5 text-xs focus:outline-none focus:border-amber-500" />
+                class="goal-current-input flex-1 bg-obsidian-800 border border-obsidian-600 rounded-lg px-2.5 py-1.5 text-xs focus:outline-none focus:border-amber-500 " />
               <button onclick="requestUpdateGoal('${g.id}')" class="text-xs px-3 py-1.5 rounded-lg bg-amber-500/15 text-amber-400 hover:bg-amber-500/25 transition-colors">
                 Update
               </button>
             </div>
-            <p class="text-[11px] text-gray-500 mt-2">${pct.toFixed(1)}% complete</p>
+            <p class="text-[0.6875rem] text-gray-400 mt-2">${pct.toFixed(1)}% complete</p>
+            ${goalNeed(g)}
           </div>
         `;
       }).join('');
-      safeIcons();
+      lucide.createIcons();
     }
 
     // Lock / unlock flow
@@ -987,6 +1050,7 @@
     }
 
     function openUnlockModal() {
+      unlockOpener = document.activeElement;
       document.getElementById('unlock-modal').classList.remove('hidden');
       document.getElementById('unlock-modal').classList.add('flex');
       document.getElementById('unlock-pin').value = '';
@@ -998,15 +1062,36 @@
       document.getElementById('unlock-modal').classList.add('hidden');
       document.getElementById('unlock-modal').classList.remove('flex');
       unlockTarget = null;
+      if (unlockOpener && unlockOpener.focus) unlockOpener.focus();
+      unlockOpener = null;
     };
 
     window.confirmUnlock = function() {
-      const pin = document.getElementById('unlock-pin').value.trim();
+      const pinEl = document.getElementById('unlock-pin');
+      const pin = pinEl.value.trim();
       if (pin !== LOCK_CODE) {
         document.getElementById('unlock-error').classList.remove('hidden');
+        pinEl.select();
         return;
       }
-      const { id, action } = unlockTarget || {};
+      const { kind, id, action } = unlockTarget || {};
+      if (kind === 'global') { closeUnlockModal(); applyGlobal(action); return; }
+
+      // Ledger transactions
+      if (kind === 'tx') {
+        const t = state.transactions.find(x => x.id === id);
+        if (t) {
+          if (action === 'delete') state.transactions = state.transactions.filter(x => x.id !== id);
+          else if (action === 'unlock') t.locked = false;
+        }
+        saveState();
+        closeUnlockModal();
+        refreshAll();
+        if (action === 'edit') startEditTx(id);
+        return;
+      }
+
+      // Goals
       const g = state.goals.find(x => x.id === id);
       if (!g) { closeUnlockModal(); return; }
 
@@ -1037,7 +1122,9 @@
 
       const filterCat = document.getElementById('filter-category');
       const allCats = [...new Set([...CATEGORIES.income, ...CATEGORIES.expense])];
+      const prevFilter = filterCat.value;
       filterCat.innerHTML = '<option value="all">All categories</option>' + allCats.map(c => `<option value="${c}">${c}</option>`).join('');
+      if (prevFilter) filterCat.value = prevFilter;
     }
 
     function renderLedgerChips() {
@@ -1047,7 +1134,7 @@
         const m = catMeta(c);
         return `<button type="button" data-chip="${c}" class="cat-badge hover:opacity-80 transition-opacity" style="color:${m.color};background:${m.bg}"><i data-lucide="${m.icon}" class="w-3 h-3"></i>${c}</button>`;
       }).join('');
-      safeIcons();
+      lucide.createIcons();
       el.querySelectorAll('[data-chip]').forEach(btn => {
         btn.addEventListener('click', () => {
           document.getElementById('filter-category').value = btn.dataset.chip;
@@ -1059,7 +1146,9 @@
     function getFilteredRows() {
       const typeF = document.getElementById('filter-type').value;
       const catF = document.getElementById('filter-category').value;
-      let rows = [...state.transactions].sort((a, b) => b.date.localeCompare(a.date));
+      let rows = [...visibleTx()].sort((a, b) => b.date.localeCompare(a.date));
+      const q = (document.getElementById('filter-search').value || '').trim().toLowerCase();
+      if (q) rows = rows.filter(t => (t.note || '').toLowerCase().includes(q) || t.category.toLowerCase().includes(q));
       if (typeF !== 'all') rows = rows.filter(t => t.type === typeF);
       if (catF !== 'all') rows = rows.filter(t => t.category === catF);
       return rows;
@@ -1089,13 +1178,14 @@
             <td class="py-3 pr-3">
               ${t.note
                 ? `<span class="inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg" style="color:${m.color};background:${m.bg}"><i data-lucide="message-square" class="w-3 h-3"></i>${esc(t.note)}</span>`
-                : '<span class="text-gray-600 text-xs">—</span>'}
+                : '<span class="text-gray-400 text-xs">—</span>'}
             </td>
             <td class="py-3 pr-3 text-right font-semibold ${t.type === 'income' ? 'text-emerald-400' : 'text-orange-400'}">
               ${t.type === 'income' ? '+' : '−'}${formatAUD(t.amount)}
             </td>
             <td class="py-3 text-right">
-              <button onclick="deleteTx('${t.id}')" class="p-1.5 text-gray-500 hover:text-red-400 transition-colors" title="Delete">
+              ${txLockBtn(t, 'p-1.5')}
+              <button onclick="deleteTx('${t.id}')" class="p-1.5 text-gray-400 hover:text-red-400 transition-colors" title="Delete">
                 <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
               </button>
             </td>
@@ -1114,8 +1204,8 @@
                     <i data-lucide="${m.icon}" class="w-4 h-4" style="color:${m.color}"></i>
                   </div>
                   <div class="min-w-0">
-                    <p class="text-sm font-medium truncate">${esc(t.category)}</p>
-                    <p class="text-[11px] text-gray-500">${esc(t.date)}</p>
+                    <p class="text-sm font-medium truncate">${t.category}</p>
+                    <p class="text-[0.6875rem] text-gray-400">${t.date}</p>
                   </div>
                 </div>
                 <span class="text-sm font-bold shrink-0 ${t.type === 'income' ? 'text-emerald-400' : 'text-orange-400'}">
@@ -1125,48 +1215,114 @@
               <div class="flex items-center justify-between gap-2">
                 <div class="flex items-center gap-2 flex-wrap min-w-0">
                   ${typeBadge(t.type)}
-                  ${t.note ? `<span class="text-[11px] text-gray-400 truncate max-w-[140px]">${esc(t.note)}</span>` : ''}
+                  ${t.note ? `<span class="text-[0.6875rem] text-gray-400 truncate max-w-[140px]">${esc(t.note)}</span>` : ''}
                 </div>
-                <button onclick="deleteTx('${t.id}')" class="p-2 text-gray-500 hover:text-red-400 transition-colors shrink-0" title="Delete">
-                  <i data-lucide="trash-2" class="w-4 h-4"></i>
-                </button>
+                <div class="flex items-center shrink-0">
+                  ${txLockBtn(t, 'p-2')}
+                  <button onclick="deleteTx('${t.id}')" class="p-2 text-gray-400 hover:text-red-400 transition-colors" title="Delete">
+                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                  </button>
+                </div>
               </div>
             </div>
           `;
         }).join('');
       }
-      safeIcons();
+      lucide.createIcons();
     }
 
+    const csvSafe = v => { v = String(v || ''); return /^[=+\-@\t\r]/.test(v) ? "'" + v : v; };
     function exportCSV() {
       const rows = getFilteredRows();
       if (!rows.length) { alert('No transactions to export.'); return; }
       const header = ['Date', 'Type', 'Category', 'Note', 'Amount (AUD)'];
       const lines = rows.map(t => [
         t.date, t.type, `"${t.category.replace(/"/g, '""')}"`,
-        `"${(t.note || '').replace(/"/g, '""')}"`, t.amount
+        `"${csvSafe(t.note).replace(/"/g, '""')}"`, t.amount
       ].join(','));
       const csv = [header.join(','), ...lines].join('\n');
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `finora-ledger-${todayStr()}.csv`;
-      document.body.appendChild(a);
+      a.download = `monexa-ledger-${new Date().toISOString().slice(0, 10)}.csv`;
       a.click();
-      a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      URL.revokeObjectURL(url);
     }
 
     window.deleteTx = function(id) {
-      state.transactions = state.transactions.filter(t => t.id !== id);
-      saveState();
-      refreshAll();
+      const t = state.transactions.find(x => x.id === id);
+      if (!t) return;
+      if (t.locked !== false) {
+        unlockTarget = { kind: 'tx', id, action: 'delete' };
+        openUnlockModal();
+      } else if (confirm('Delete this transaction?')) {
+        state.transactions = state.transactions.filter(x => x.id !== id);
+        saveState();
+        refreshAll();
+      }
+    };
+
+    window.toggleTxLock = function(id) {
+      const t = state.transactions.find(x => x.id === id);
+      if (!t) return;
+      if (t.locked !== false) {
+        unlockTarget = { kind: 'tx', id, action: 'unlock' };
+        openUnlockModal();
+      } else {
+        t.locked = true;
+        saveState();
+        renderTable();
+      }
+    };
+
+    function txLockBtn(t, pad) {
+      const locked = t.locked !== false;
+      return `<button onclick="toggleTxLock('${t.id}')" class="${pad} ${locked ? 'text-amber-400' : 'text-gray-400 hover:text-amber-400'} transition-colors" title="${locked ? 'Locked — click to unlock' : 'Unlocked — click to lock'}" aria-label="${locked ? 'Unlock' : 'Lock'} transaction"><i data-lucide="${locked ? 'lock' : 'unlock'}" class="w-3.5 h-3.5"></i></button>`
+        + `<button onclick="editTx('${t.id}')" class="${pad} text-gray-400 hover:text-cyan-400 transition-colors" title="Edit" aria-label="Edit transaction"><i data-lucide="pencil" class="w-3.5 h-3.5"></i></button>`;
+    }
+
+    window.editTx = function(id) {
+      const t = state.transactions.find(x => x.id === id);
+      if (!t) return;
+      if (t.locked !== false) { unlockTarget = { kind: 'tx', id, action: 'edit' }; openUnlockModal(); }
+      else startEditTx(id);
+    };
+    function startEditTx(id) {
+      const t = state.transactions.find(x => x.id === id);
+      if (!t) return;
+      editingTxId = id;
+      document.getElementById('tx-type').value = t.type;
+      populateCategorySelects();
+      document.getElementById('tx-category').value = t.category;
+      document.getElementById('tx-amount').value = t.amount;
+      document.getElementById('tx-note').value = t.note || '';
+      document.getElementById('tx-date').value = t.date;
+      document.getElementById('tx-submit-label').textContent = 'Save';
+      document.getElementById('tx-cancel').classList.remove('hidden');
+      switchView('ledger');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    window.cancelEditTx = function() {
+      editingTxId = null;
+      document.getElementById('tx-form').reset();
+      document.getElementById('tx-date').value = todayStr();
+      populateCategorySelects();
+      document.getElementById('tx-submit-label').textContent = 'Add';
+      document.getElementById('tx-cancel').classList.add('hidden');
     };
 
     // ========== BUDGETS ==========
     function getActiveSplits() {
       if (activeBudgetModel === 'custom') return state.customSplits;
+      if (activeBudgetModel === 'zerobased') {
+        const inc = parseFloat(document.getElementById('budget-income').value) || 0;
+        const m = viewMonth === 'all' ? latestMonth() : viewMonth;
+        const b = m ? calcTotals(m).bucket : { needs: 0, wants: 0 };
+        const needs = inc > 0 ? Math.round(b.needs / inc * 1000) / 10 : 0;
+        const wants = inc > 0 ? Math.round(b.wants / inc * 1000) / 10 : 0;
+        return { needs, wants, savings: Math.max(0, Math.round((100 - needs - wants) * 10) / 10) };
+      }
       return MODELS[activeBudgetModel].splits;
     }
 
@@ -1175,7 +1331,7 @@
       el.innerHTML = Object.entries(MODELS).map(([key, m]) => `
         <button data-model="${key}" class="model-card text-left rounded-xl border border-obsidian-600 bg-obsidian-800/60 p-4 hover:border-emerald-500/40 transition-all ${activeBudgetModel === key ? 'budget-card-active' : ''}">
           <p class="text-sm font-semibold mb-0.5">${m.name}</p>
-          <p class="text-[11px] text-gray-500">${m.short}</p>
+          <p class="text-[0.6875rem] text-gray-400">${m.short}</p>
         </button>
       `).join('');
 
@@ -1203,7 +1359,7 @@
           </div>
         </div>
       `;
-      safeIcons();
+      lucide.createIcons();
 
       const results = document.getElementById('budget-results');
       const cards = [
@@ -1213,10 +1369,26 @@
       ];
       results.innerHTML = cards.map(c => `
         <div class="rounded-xl bg-obsidian-800/80 border border-obsidian-600 p-5 text-center">
-          <p class="text-[11px] uppercase tracking-wider text-gray-500 mb-1">${c.label}</p>
+          <p class="text-[0.6875rem] uppercase tracking-wider text-gray-400 mb-1">${c.label}</p>
           <p class="text-xl font-bold" style="color:${c.color}">${formatAUD(c.amount)}</p>
         </div>
       `).join('');
+
+      // Budget vs actual
+      const act = document.getElementById('budget-actual');
+      if (viewMonth === 'all') {
+        act.innerHTML = '<p class="text-xs text-gray-400">Pick a month in the top bar to compare what you actually spent with this model.</p>';
+      } else {
+        const tt = calcTotals();
+        const rows = [['Needs', income * splits.needs / 100, tt.bucket.needs, false], ['Wants', income * splits.wants / 100, tt.bucket.wants, false], ['Savings / Invest', income * splits.savings / 100, tt.savings, true]];
+        act.innerHTML = `<p class="text-xs font-semibold mb-3">Budget vs actual — ${monthLabel(viewMonth)}</p>` + rows.map(([label, target, actual, isSave]) => {
+          const pct = target > 0 ? Math.min(100, Math.max(0, actual / target * 100)) : 0;
+          const diff = actual - target;
+          const bad = isSave ? diff < 0 : diff > 0;
+          const word = isSave ? (diff < 0 ? 'Short by' : 'Ahead by') : (diff > 0 ? 'Over by' : 'Under by');
+          return `<div class="mb-3 last:mb-0"><div class="flex justify-between text-xs mb-1"><span class="text-gray-300">${label}</span><span class="text-gray-400">${formatAUD(actual)} of ${formatAUD(target)} · <span class="${bad ? 'text-orange-400' : 'text-emerald-400'}">${word} ${formatAUD(Math.abs(diff))}</span></span></div><div class="h-1.5 bg-obsidian-600 rounded-full overflow-hidden"><div class="h-full rounded-full ${bad ? 'bg-orange-400' : 'bg-emerald-500'}" style="width:${pct}%"></div></div></div>`;
+        }).join('');
+      }
 
       // Comparison
       const s503020 = MODELS['503020'].splits;
@@ -1263,48 +1435,41 @@
     }
 
     function renderProjection() {
-      const initial = Math.max(0, parseFloat(document.getElementById('proj-initial').value) || 0);
-      const monthly = Math.max(0, parseFloat(document.getElementById('proj-monthly').value) || 0);
-      const rate = Math.min(30, Math.max(0, parseFloat(document.getElementById('proj-rate').value) || 0));
-      const years = Math.min(40, Math.max(1, parseInt(document.getElementById('proj-years').value, 10) || 1));
+      const initial = parseFloat(document.getElementById('proj-initial').value) || 0;
+      const monthly = parseFloat(document.getElementById('proj-monthly').value) || 0;
+      const rate = parseFloat(document.getElementById('proj-rate').value) || 0;
+      const infl = parseFloat(document.getElementById('proj-inflation').value) || 0;
+      const years = parseInt(document.getElementById('proj-years').value, 10) || 1;
 
-      const result = compoundFV(initial, monthly, rate, years);
-      document.getElementById('proj-fv').textContent = formatAUD(result.fv);
-      document.getElementById('proj-contributed').textContent = formatAUD(result.contributed);
-      document.getElementById('proj-interest').textContent = formatAUD(result.interest);
+      const base = compoundFV(initial, monthly, rate, years);
+      const low = compoundFV(initial, monthly, Math.max(0, rate - 3), years);
+      const high = compoundFV(initial, monthly, rate + 3, years);
+      document.getElementById('proj-fv').textContent = formatAUD(Math.round(base.fv));
+      document.getElementById('proj-contributed').textContent = formatAUD(Math.round(base.contributed));
+      document.getElementById('proj-interest').textContent = formatAUD(Math.round(base.interest));
+      document.getElementById('proj-real').textContent = formatAUD(Math.round(base.fv / Math.pow(1 + infl / 100, years)));
 
       const ctx = document.getElementById('chart-projection');
-      if (projectionChart) { projectionChart.destroy(); projectionChart = null; }
-      if (typeof Chart === 'undefined') return;
-
+      const ds = (label, r, color, fill, dash) => ({ label, data: r.points.map(p => Math.round(p.value)), borderColor: color, backgroundColor: 'rgba(16, 185, 129, 0.12)', fill, tension: 0.35, pointRadius: dash ? 0 : 3, pointBackgroundColor: color, borderWidth: dash ? 1.5 : 2, borderDash: dash ? [5, 4] : [] });
+      const labels = base.points.map(p => 'Y' + p.year);
+      const sets = [
+        ds(`High (${rate + 3}%)`, high, '#22d3ee', false, true),
+        ds(`Base (${rate}%)`, base, '#10b981', true, false),
+        ds(`Low (${Math.max(0, rate - 3)}%)`, low, '#fbbf24', false, true)
+      ];
+      if (projectionChart) { projectionChart.data.labels = labels; projectionChart.data.datasets = sets; projectionChart.update('none'); return; }
       projectionChart = new Chart(ctx, {
         type: 'line',
-        data: {
-          labels: result.points.map(p => 'Y' + p.year),
-          datasets: [{
-            label: 'Portfolio Value',
-            data: result.points.map(p => Math.round(p.value)),
-            borderColor: '#10b981',
-            backgroundColor: 'rgba(16, 185, 129, 0.12)',
-            fill: true,
-            tension: 0.35,
-            pointRadius: 3,
-            pointBackgroundColor: '#10b981',
-            borderWidth: 2
-          }]
-        },
+        data: { labels, datasets: sets },
         options: {
           responsive: true,
           maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
+          plugins: { legend: { display: true, labels: { color: '#9ca3af', boxWidth: 12, font: { size: 11 } } } },
           scales: {
-            x: { grid: { color: 'rgba(33, 38, 54, 0.6)' }, ticks: { color: '#6b7280', font: { size: 11 } } },
+            x: { grid: { color: 'rgba(33, 38, 54, 0.6)' }, ticks: { color: '#9ca3af', font: { size: 11 } } },
             y: {
               grid: { color: 'rgba(33, 38, 54, 0.6)' },
-              ticks: {
-                color: '#6b7280', font: { size: 11 },
-                callback: v => '$' + (v >= 1e6 ? (v / 1e6).toFixed(1).replace(/\.0$/, '') + 'M' : v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v)
-              }
+              ticks: { color: '#9ca3af', font: { size: 11 }, callback: v => '$' + (v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v) }
             }
           }
         }
@@ -1312,7 +1477,15 @@
     }
 
     // ========== REFRESH ==========
+    let refreshQueued = false;
     function refreshAll() {
+      if (refreshQueued) return;
+      refreshQueued = true;
+      requestAnimationFrame(() => { refreshQueued = false; refreshNow(); });
+    }
+    function refreshNow() {
+      renderMonthSelect();
+      syncBudgetIncome();
       renderTickers();
       renderExpenseChart();
       renderRecent();
@@ -1323,6 +1496,7 @@
       renderModelCards();
       renderBudgets();
       renderProjection();
+      lucide.createIcons();
     }
 
     // ========== NAV ==========
@@ -1339,7 +1513,6 @@
       const titles = { overview: 'Overview', ledger: 'Ledger', budgets: 'Budget Models', goals: 'Goals', projections: 'Projections' };
       document.getElementById('page-title').textContent = titles[view] || 'Dashboard';
       if (window.innerWidth < 1024) toggleSidebar(false);
-      window.scrollTo({ top: 0, behavior: 'instant' });
       setTimeout(() => {
         if (expenseChart) expenseChart.resize();
         if (projectionChart) projectionChart.resize();
@@ -1349,10 +1522,13 @@
     window.toggleSidebar = function(force) {
       const sb = document.getElementById('sidebar');
       const ov = document.getElementById('sidebar-overlay');
-      const open = typeof force === 'boolean' ? force : !sb.classList.contains('open');
-      sb.classList.toggle('open', open);
-      ov.classList.toggle('hidden', !open);
-      document.body.style.overflow = (open && window.innerWidth < 1024) ? 'hidden' : '';  // no background scroll behind the drawer
+      if (force === false) {
+        sb.classList.remove('open');
+        ov.classList.add('hidden');
+        return;
+      }
+      sb.classList.toggle('open');
+      ov.classList.toggle('hidden');
     };
 
     // ========== EVENTS ==========
@@ -1371,16 +1547,24 @@
       const category = document.getElementById('tx-category').value;
       const amount = parseFloat(document.getElementById('tx-amount').value);
       const note = document.getElementById('tx-note').value.trim();
+      const date = document.getElementById('tx-date').value || todayStr();
       if (!amount || amount <= 0) return;
-      state.transactions.push({
-        id: uid(), type, category, amount, note,
-        date: todayStr()
-      });
+      if (editingTxId) {
+        const t = state.transactions.find(x => x.id === editingTxId);
+        if (t) Object.assign(t, { type, category, amount, note, date });
+      } else {
+        state.transactions.push({ id: uid(), type, category, amount, note, locked: true, date });
+      }
+      if (viewMonth !== 'all' && monthOf({ date }) !== viewMonth) viewMonth = monthOf({ date });
+      incomeAuto = true;
+      toast(editingTxId ? 'Transaction updated' : 'Transaction added');
       saveState();
-      document.getElementById('tx-amount').value = '';
-      document.getElementById('tx-note').value = '';
+      cancelEditTx();
       refreshAll();
     });
+
+    document.getElementById('filter-search').addEventListener('input', renderTable);
+    document.getElementById('month-select').addEventListener('change', e => { viewMonth = e.target.value; incomeAuto = true; refreshAll(); });
 
     document.getElementById('filter-type').addEventListener('change', renderTable);
     document.getElementById('filter-category').addEventListener('change', renderTable);
@@ -1391,15 +1575,16 @@
       const target = parseFloat(document.getElementById('goal-target').value);
       const current = parseFloat(document.getElementById('goal-current').value) || 0;
       const locked = document.getElementById('goal-lock').checked;
-      if (!name || !(target > 0)) return;
-      state.goals.push({ id: uid(), name, target, current, locked });
+      if (!name || !target) return;
+      state.goals.push({ id: uid(), name, target, current, locked, targetDate: document.getElementById('goal-date').value || '' });
       saveState();
       document.getElementById('goal-form').reset();
       document.getElementById('goal-current').value = '0';
+      document.getElementById('goal-lock').checked = true;
       refreshAll();
     });
 
-    document.getElementById('budget-income').addEventListener('input', renderBudgets);
+    document.getElementById('budget-income').addEventListener('input', () => { incomeAuto = false; renderBudgets(); });
 
     function updateCustomTotal() {
       const n = parseFloat(document.getElementById('custom-needs').value) || 0;
@@ -1407,8 +1592,8 @@
       const s = parseFloat(document.getElementById('custom-savings').value) || 0;
       const total = n + w + s;
       const msg = document.getElementById('custom-total-msg');
-      msg.textContent = `Total: ${Number(total.toFixed(2))}%`;
-      msg.className = 'text-xs ' + (Math.abs(total - 100) < 0.01 ? 'text-emerald-400' : 'text-amber-400');
+      msg.textContent = `Total: ${total}%`;
+      msg.className = 'text-xs ' + (total === 100 ? 'text-emerald-400' : 'text-amber-400');
     }
     ['custom-needs', 'custom-wants', 'custom-savings'].forEach(id => {
       document.getElementById(id).addEventListener('input', updateCustomTotal);
@@ -1418,8 +1603,8 @@
       const n = parseFloat(document.getElementById('custom-needs').value) || 0;
       const w = parseFloat(document.getElementById('custom-wants').value) || 0;
       const s = parseFloat(document.getElementById('custom-savings').value) || 0;
-      if (n < 0 || w < 0 || s < 0 || Math.abs(n + w + s - 100) > 0.01) {
-        alert('Percentages must be positive and total exactly 100%.');
+      if (n + w + s !== 100) {
+        alert('Percentages must total exactly 100%.');
         return;
       }
       state.customSplits = { needs: n, wants: w, savings: s };
@@ -1428,34 +1613,81 @@
       renderBudgets();
     });
 
-    ['proj-initial', 'proj-monthly', 'proj-rate', 'proj-years'].forEach(id => {
+    ['proj-initial', 'proj-monthly', 'proj-rate', 'proj-inflation', 'proj-years'].forEach(id => {
       document.getElementById(id).addEventListener('input', renderProjection);
     });
 
-    document.getElementById('btn-reset').addEventListener('click', () => {
-      if (confirm('Reset to sample data? Your current transactions and goals will be replaced.')) {
-        state = JSON.parse(JSON.stringify(SAMPLE));
-        saveState();
-        refreshAll();
-      }
-    });
+    function applyGlobal(action) {
+      state = action === 'clear' ? { transactions: [], goals: [], customSplits: { needs: 50, wants: 30, savings: 20 } } : JSON.parse(JSON.stringify(SAMPLE));
+      normalizeState(state);
+      MODELS.custom.splits = state.customSplits;
+      viewMonth = latestMonth() || 'all';
+      incomeAuto = true;
+      saveState();
+      refreshAll();
+    }
+    function requestGlobal(action) {
+      const msg = action === 'clear' ? 'Delete ALL transactions and goals and start fresh?' : 'Reset to sample data? Your current transactions and goals will be replaced.';
+      if (!confirm(msg)) return;
+      unlockTarget = { kind: 'global', action };
+      openUnlockModal();
+    }
+    document.getElementById('btn-reset').addEventListener('click', () => requestGlobal('reset'));
+    document.getElementById('btn-clear').addEventListener('click', () => requestGlobal('clear'));
 
     document.getElementById('unlock-pin').addEventListener('keydown', e => {
-      if (e.key === 'Enter') confirmUnlock();
+      if (e.key === 'Enter') { e.preventDefault(); confirmUnlock(); }
+      else if (e.key === 'Escape') closeUnlockModal();
+    });
+
+    document.getElementById('unlock-modal').addEventListener('keydown', e => {
+      if (e.key === 'Escape') { closeUnlockModal(); return; }
+      if (e.key !== 'Tab') return;
+      const f = [...e.currentTarget.querySelectorAll('input,button')];
+      if (e.shiftKey && document.activeElement === f[0]) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && document.activeElement === f[f.length - 1]) { e.preventDefault(); f[0].focus(); }
     });
 
     document.getElementById('btn-export-csv').addEventListener('click', exportCSV);
 
-    // Escape closes the drawer / unlock dialog; leaving mobile width resets the drawer
-    document.addEventListener('keydown', e => {
-      if (e.key !== 'Escape') return;
-      if (!document.getElementById('unlock-modal').classList.contains('hidden')) closeUnlockModal();
-      else toggleSidebar(false);
+    document.getElementById('btn-export-json').addEventListener('click', () => {
+      const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'monexa-backup-' + todayStr() + '.json';
+      a.click();
+      URL.revokeObjectURL(a.href);
+      toast('Backup downloaded');
     });
-    window.addEventListener('resize', () => { if (window.innerWidth >= 1024) toggleSidebar(false); }, { passive: true });
+    document.getElementById('btn-import-json').addEventListener('click', () => document.getElementById('import-file').click());
+    document.getElementById('import-file').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const data = JSON.parse(reader.result);
+          if (!Array.isArray(data.transactions) || !Array.isArray(data.goals)) throw new Error('bad shape');
+          if (!confirm('Replace current data with this backup?')) return;
+          data.customSplits = data.customSplits || { needs: 50, wants: 30, savings: 20 };
+          sanitizeState(data);
+          normalizeState(data);
+          state = data;
+          MODELS.custom.splits = state.customSplits;
+          incomeAuto = true;
+          saveState();
+          refreshAll();
+          toast('Backup restored');
+        } catch (err) { alert('That file is not a valid Monexa backup.'); }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    });
 
     // ========== INIT ==========
     populateCategorySelects();
+    viewMonth = latestMonth() || 'all';
+    document.getElementById('tx-date').value = todayStr();
     const totals = calcTotals();
     if (totals.income > 0) document.getElementById('budget-income').value = Math.round(totals.income);
     // hydrate custom model splits from state
@@ -1464,10 +1696,10 @@
     document.getElementById('custom-wants').value = state.customSplits.wants;
     document.getElementById('custom-savings').value = state.customSplits.savings;
 
-    try { refreshAll(); } catch (e) { console.error(e); }
-    safeIcons();
-    setTimeout(() => document.getElementById('loader').classList.add('hidden'), 600);
-    setTimeout(() => document.getElementById('loader').classList.add('hidden'), 4000); // fail-safe
+    refreshNow();
+    requestAnimationFrame(() => requestAnimationFrame(() => document.getElementById('loader').classList.add('hidden')));
+  
+    });
   </script>
 
   <!-- Mobile bottom navigation -->
@@ -1493,6 +1725,5 @@
       <span>Grow</span>
     </button>
   </nav>
-  <script>safeIcons();</script>
 </body>
 </html>
